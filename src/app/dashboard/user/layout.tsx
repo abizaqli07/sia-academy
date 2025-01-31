@@ -1,8 +1,16 @@
 import Header from "~/components/layout/header";
 import Sidebar from "~/components/layout/sidebar";
 import { type ReactNode } from "react";
+import { auth } from "~/server/auth";
+import { redirect } from "next/navigation";
 
-const DashboardLayout = ({ children }: { children: ReactNode }) => {
+const UserDashboardLayout = async ({ children }: { children: ReactNode }) => {
+  const session = await auth();
+
+  if (!session || session?.user.role === "USER") {
+    redirect("/auth/signin");
+  }
+
   return (
     <>
       <Header />
@@ -14,4 +22,4 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default DashboardLayout;
+export default UserDashboardLayout;
