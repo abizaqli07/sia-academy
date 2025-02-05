@@ -10,9 +10,14 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import Xendit from "xendit-node";
 
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
+import { env } from "~/env";
+
+
+
 
 /**
  * 1. CONTEXT
@@ -29,8 +34,13 @@ import { db } from "~/server/db";
 export const createTRPCContext = async (opts: { headers: Headers }) => {
   const session = await auth();
 
+  const xnd = new Xendit({
+    secretKey: env.XENDIT_SECRET_KEY,
+  });
+
   return {
     db,
+    xnd,
     session,
     ...opts,
   };

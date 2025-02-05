@@ -16,7 +16,7 @@ import { type AdapterAccount } from "next-auth/adapters";
 
 // =========== Enums ========== //
 export const userRole = pgEnum("userRole", ["USER", "MENTOR", "ADMIN"]);
-export const purchaseStatus = pgEnum("purchaseStatus", ["PURCHASED", "FREE"]);
+export const purchaseStatus = pgEnum("purchaseStatus", ["PURCHASED", "PENDING", "FREE"]);
 export const courseLevel = pgEnum("courseLevel", [
   "BEGINNER",
   "INTERMEDIATE",
@@ -449,7 +449,7 @@ export const purchase = createTable("purchase", {
     .references(() => users.id, { onDelete: "cascade" }),
   courseId: varchar("courseId").references(() => course.id),
   mentoringId: varchar("mentoringId").references(() => userMentoringData.id),
-  status: purchaseStatus("status").default("PURCHASED"),
+  status: purchaseStatus("status").default("PENDING"),
   invoiceId: varchar("invoiceId", { length: 255 }).unique(),
   invoiceUrl: varchar("invoiceUrl", { length: 255 }),
   createdAt: timestamp("created_at")

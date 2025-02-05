@@ -1,23 +1,6 @@
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
 import { seed as drizzleSeed } from "drizzle-seed";
-import { reset } from "drizzle-seed";
-
-import { env } from "~/env";
+import { db } from ".";
 import * as schema from "./schema";
-
-/**
- * Cache the database connection in development. This avoids creating a new connection on every HMR
- * update.
- */
-const globalForDb = globalThis as unknown as {
-  conn: postgres.Sql | undefined;
-};
-
-const conn = globalForDb.conn ?? postgres(env.DATABASE_URL);
-if (env.NODE_ENV !== "production") globalForDb.conn = conn;
-
-export const db = drizzle(conn, { schema });
 
 // Seeding
 async function seed() {
@@ -40,7 +23,6 @@ async function seed() {
     "https://3w9phjqcaf.ufs.sh/f/61b526bb-5818-45c9-889d-598f66a16a1d-uwei8l.png",
     "https://3w9phjqcaf.ufs.sh/f/a0f4831b-05bb-4876-98bd-1a750328a0ab-jscrml.png",
   ];
-  await reset(db, schema);
 
   await drizzleSeed(db, {
     category: schema.category,
@@ -53,9 +35,6 @@ async function seed() {
         name: f.valuesFromArray({
           values: industries,
         }),
-      },
-      with: {
-        course: 1
       }
     },
     mentor: {

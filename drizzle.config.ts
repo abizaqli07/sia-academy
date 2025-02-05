@@ -8,5 +8,5 @@ export default {
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-  tablesFilter: ["sia-academy_*"],
+  tablesFilter: ["sia_*"],
 } satisfies Config;
