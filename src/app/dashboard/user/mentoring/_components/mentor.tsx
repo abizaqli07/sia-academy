@@ -29,7 +29,7 @@ const MentorSection = ({ mentorings }: mentoringPropsInterface) => {
               mentorings.map((data) => (
                 <Link
                   key={data.id}
-                  href={`/mentoring/${data.id}`}
+                  href={`/dashboard/user/mentoring/${data.id}`}
                   className="flex w-full max-w-[330px] flex-col justify-between gap-6 rounded-lg p-4 shadow-md"
                 >
                   <div className="w-full space-y-6">

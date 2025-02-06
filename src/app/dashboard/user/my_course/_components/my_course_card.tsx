@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdBook } from "react-icons/io";
 import { MdOutlineDateRange } from "react-icons/md";
+import { Badge } from "~/components/ui/badge";
 
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
@@ -45,7 +47,7 @@ const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
             <IoMdBook className="text-xl" />{" "}
             {data.course?.materi?.split(",").length} Sessions
           </div>
-          <div className="flex items-center gap-2 ">
+          <div className="flex items-center gap-2">
             <MdOutlineDateRange className="text-xl" />
             {data.course?.date?.toLocaleDateString()}
           </div>
@@ -54,7 +56,10 @@ const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
             {data.course?.place}
           </div>
           {data.status === "FREE" && data.course?.placeUrl ? (
-            <Button onClick={() => router.push(data.course?.placeUrl ?? "")} className=" mt-4">
+            <Button
+              onClick={() => router.push(data.course?.placeUrl ?? "")}
+              className="mt-4"
+            >
               Zoom meet Link
             </Button>
           ) : (
@@ -62,20 +67,20 @@ const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
           )}
         </div>
         <Separator />
-        {/* <div className="flex w-full items-center justify-between">
+        <div className="flex w-full items-center justify-between">
           <div className="font-medium">Status</div>
           {data?.status === "FREE" ? (
             <Badge>Free</Badge>
-          ) : invoiceData?.status === "PAID" ? (
-            <Badge>{status}</Badge>
-          ) : invoiceData?.status === "EXPIRED" ? (
-            <Badge variant={"destructive"}>Expired</Badge>
+          ) : data?.status === "PURCHASED" ? (
+            <Badge>Payment Complete</Badge>
+          ) : data?.status === "PENDING" ? (
+            <Badge>Pending</Badge>
           ) : (
             <Link href={data?.invoiceUrl ?? ""}>
               <Button>Payout</Button>
             </Link>
           )}
-        </div> */}
+        </div>
       </div>
     </div>
   );

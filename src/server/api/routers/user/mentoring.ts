@@ -1,6 +1,11 @@
 import { desc } from "drizzle-orm";
 import { createTRPCRouter, protectedProcedure } from "../../trpc";
-import { mentoring } from "~/server/db/schema";
+import { mentoring, userMentoringData } from "~/server/db/schema";
+import {
+  MentoringIdSchema,
+  RegisterUserDataMentoringSchema,
+} from "~/server/validator/mentoring";
+import { TRPCError } from "@trpc/server";
 
 export const mentoringRouter = createTRPCRouter({
   getAllMentoring: protectedProcedure.query(async ({ ctx }) => {
@@ -14,6 +19,66 @@ export const mentoringRouter = createTRPCRouter({
 
     return allMentoring;
   }),
+  getOneMentoring: protectedProcedure
+    .input(MentoringIdSchema)
+    .query(async ({ input, ctx }) => {
+      const detailMentoring = await ctx.db.query.mentoring.findFirst({
+        where: (mentoring, { eq }) => eq(mentoring.id, input.mentoringId),
+        with: {
+          category: true,
+          mentor: true,
+        },
+      });
+
+      return detailMentoring;
+    }),
+  inputUserMentoringData: protectedProcedure
+    .input(RegisterUserDataMentoringSchema)
+    .mutation(async ({ input, ctx }) => {
+      const mentoring = await ctx.db.query.mentoring.findFirst({
+        where: (mentoring, { eq }) => eq(mentoring.id, input.mentoringId),
+      });
+
+      if (mentoring === undefined) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Mentoring Not Found",
+        });
+      }
+
+      try {
+        const insertUserData = await ctx.db
+          .insert(userMentoringData)
+          .values({
+            userId: ctx.session.user.id,
+            mentoringId: input.mentoringId,
+            objective: input.objective,
+            preference: input.preference,
+            positionPreference: input.positionPreference,
+            referral: input.referral,
+            cv: input.cv,
+          })
+          .onConflictDoUpdate({
+            target: [userMentoringData.userId, userMentoringData.mentoringId],
+            set: {
+              objective: input.objective,
+              preference: input.preference,
+              positionPreference: input.positionPreference,
+              referral: input.referral,
+              cv: input.cv,
+            },
+          })
+          .returning();
+
+        return insertUserData;
+      } catch (error) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: `Some error occured`,
+          cause: error
+        });
+      }
+    }),
   getAllMyMentoring: protectedProcedure.query(async ({ ctx }) => {
     const purchases = await ctx.db.query.purchase
       .findMany({

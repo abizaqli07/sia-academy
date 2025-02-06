@@ -16,8 +16,10 @@ import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 import { env } from "~/env";
 
-
-
+// Context
+const xnd = new Xendit({
+  secretKey: env.XENDIT_SECRET_KEY,
+});
 
 /**
  * 1. CONTEXT
@@ -33,10 +35,6 @@ import { env } from "~/env";
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
   const session = await auth();
-
-  const xnd = new Xendit({
-    secretKey: env.XENDIT_SECRET_KEY,
-  });
 
   return {
     db,

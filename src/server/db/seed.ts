@@ -1,6 +1,13 @@
+import { drizzle } from "drizzle-orm/postgres-js";
 import { seed as drizzleSeed } from "drizzle-seed";
-import { db } from ".";
+import postgres from "postgres";
+import { env } from "~/env";
 import * as schema from "./schema";
+
+
+const conn = postgres(env.DATABASE_URL);
+
+export const db = drizzle(conn, { schema });
 
 // Seeding
 async function seed() {

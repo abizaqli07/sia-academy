@@ -31,7 +31,7 @@ const CourseSection = ({ courses }: CourseSectionPropsInterface) => {
               courses.map((data) => (
                 <Link
                   key={data.id}
-                  href={`/bootcamp/${data.id}`}
+                  href={`/dashboard/user/course/${data.id}`}
                   className="flex w-full max-w-[320px] flex-col gap-6 rounded-lg p-4 shadow-md"
                 >
                   <div>
