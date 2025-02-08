@@ -9,7 +9,7 @@ import {
 } from "~/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
 import { useState } from "react";
-import { DashboardNav } from "./dashboard-nav";
+import { DashboardNav } from "../dashboard-nav";
 import { navItems } from "./nav-data";
 
 export function MobileSidebar() {

@@ -1,11 +1,13 @@
 import { drizzle } from "drizzle-orm/postgres-js";
-import { seed as drizzleSeed } from "drizzle-seed";
+import { seed as drizzleSeed, reset } from "drizzle-seed";
 import postgres from "postgres";
-import { env } from "~/env";
 import * as schema from "./schema";
 
+if(!process.env.DATABASE_URL){
+  throw new Error("Database env required")
+}
 
-const conn = postgres(env.DATABASE_URL);
+const conn = postgres(process.env.DATABASE_URL);
 
 export const db = drizzle(conn, { schema });
 
@@ -31,21 +33,38 @@ async function seed() {
     "https://3w9phjqcaf.ufs.sh/f/a0f4831b-05bb-4876-98bd-1a750328a0ab-jscrml.png",
   ];
 
+  await reset(db, schema);
+
   await drizzleSeed(db, {
     category: schema.category,
+    users: schema.users,
     mentor: schema.mentor,
     course: schema.course,
-    coursesToMentor: schema.coursesToMentors,
+    mentoring: schema.mentoring,
+    coursesToMentors: schema.coursesToMentors,
   }).refine((f) => ({
     category: {
       columns: {
         name: f.valuesFromArray({
           values: industries,
         }),
-      }
+      },
+    },
+    users: {
+      columns: {
+        name: f.fullName(),
+        email: f.email(),
+        phone: f.phoneNumber({ generatedDigitsNumbers: 12 }),
+        password: f.valuesFromArray({
+          values: [
+            "$2b$10$UhQd1jp6Zm6QMzhXcwto8eDHBzRUxFaJGhPrNAHm.qj7CMq.6rZAK",
+          ],
+        }),
+        role: f.valuesFromArray({ values: ["MENTOR"] }),
+        notifConsent: f.valuesFromArray({ values: [false] }),
+      },
     },
     mentor: {
-      count: 10,
       columns: {
         company: f.companyName(),
         expertise: f.valuesFromArray({
@@ -67,6 +86,7 @@ async function seed() {
       },
     },
     course: {
+      count: 10,
       columns: {
         bannerImage: f.valuesFromArray({ values: bannerImages }),
         date: f.datetime(),
@@ -78,7 +98,7 @@ async function seed() {
         isSale: f.valuesFromArray({ values: [false] }),
         isWebinar: f.boolean(),
         requireProofment: f.valuesFromArray({ values: [false] }),
-        title: f.valuesFromArray({values: ["Title for Course"]}),
+        title: f.valuesFromArray({ values: ["Title for Course"] }),
         titleDesc: f.loremIpsum({ sentencesCount: 12 }),
         materi: f.valuesFromArray({ values: ["Materi A,Materi B,Materi C"] }),
         place: f.streetAddress(),
@@ -88,6 +108,22 @@ async function seed() {
           maxValue: 1000000,
           precision: 15,
         }),
+      },
+    },
+    mentoring: {
+      count: 10,
+      columns: {
+        title: f.valuesFromArray({ values: ["Mentoring Title"] }),
+        desc: f.loremIpsum({ sentencesCount: 12 }),
+        materi: f.valuesFromArray({ values: ["Materi A,Materi B,Materi C"] }),
+        bannerImage: f.valuesFromArray({ values: bannerImages }),
+        price: f.number({
+          minValue: 100000,
+          maxValue: 1000000,
+          precision: 15,
+        }),
+        isFeatured: f.valuesFromArray({ values: [true] }),
+        isHidden: f.valuesFromArray({ values: [false] }),
       },
     },
   }));

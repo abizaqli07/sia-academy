@@ -16,7 +16,11 @@ import { type AdapterAccount } from "next-auth/adapters";
 
 // =========== Enums ========== //
 export const userRole = pgEnum("userRole", ["USER", "MENTOR", "ADMIN"]);
-export const purchaseStatus = pgEnum("purchaseStatus", ["PURCHASED", "PENDING", "FREE"]);
+export const purchaseStatus = pgEnum("purchaseStatus", [
+  "PURCHASED",
+  "PENDING",
+  "FREE",
+]);
 export const courseLevel = pgEnum("courseLevel", [
   "BEGINNER",
   "INTERMEDIATE",
@@ -49,10 +53,11 @@ export const users = createTable("user", {
   notifConsent: boolean("notifConsent").default(false),
 });
 
-export const usersRelations = relations(users, ({ many }) => ({
+export const usersRelations = relations(users, ({ many, one }) => ({
+  mentorData: one(mentor),
   accounts: many(accounts),
   carts: many(cart),
-  purchases: many(purchase)
+  purchases: many(purchase),
 }));
 
 export const accounts = createTable(
@@ -224,6 +229,7 @@ export const courseRelations = relations(course, ({ many, one }) => ({
   purchases: many(purchase),
   mentors: many(coursesToMentors),
   carts: many(cart),
+  chapters: many(chapter),
   category: one(category, {
     fields: [course.categoryId],
     references: [category.id],
@@ -263,6 +269,46 @@ export const coursesToMentorsRelations = relations(
   }),
 );
 
+export const chapter = createTable("chapter",
+  {
+    id: varchar("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+    title: varchar("title", { length: 256 }).notNull(),
+    description: text("description"),
+    videoUrl: text("videoUrl"),
+    position: integer("position").notNull().default(0),
+    isPublished: boolean("isPublished").notNull().default(false),
+    courseId: varchar("courseId").notNull().references(() => course.id),
+    createdAt: timestamp("created_at")
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp("updatedAt").default(sql`CURRENT_TIMESTAMP`).notNull(),
+  });
+
+export const chapterRelations = relations(chapter, ({ one }) => ({
+  muxData: one(muxData, {
+    fields: [chapter.id],
+    references: [muxData.chapterId]
+  }),
+  course: one(course, {
+    fields: [chapter.courseId],
+    references: [course.id]
+  }),
+}))
+
+export const muxData = createTable("muxData",
+  {
+    id: varchar("id", { length: 255 })
+    .notNull()
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
+    assetId: text("assetId").notNull(),
+    playbackId: text("playbackId"),
+    chapterId: varchar("chapterId").notNull().references(() => chapter.id)
+  })
+
 export const codePromo = createTable("codePromo", {
   id: varchar("id", { length: 255 })
     .notNull()
@@ -300,6 +346,7 @@ export const mentor = createTable("mentor", {
     .notNull()
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
+  userId: varchar("userId").references(() => users.id),
   name: varchar("name", { length: 255 }).notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   company: varchar("company", { length: 255 }),
@@ -320,6 +367,10 @@ export const mentor = createTable("mentor", {
 export const mentorRelations = relations(mentor, ({ one, many }) => ({
   mentoring: one(mentoring),
   courses: many(coursesToMentors),
+  user: one(users, {
+    fields: [mentor.userId],
+    references: [users.id],
+  }),
 }));
 
 export const mentoring = createTable("mentoring", {
@@ -418,7 +469,7 @@ export const mentoringSchedule = createTable("mentoringSchedule", {
     .notNull()
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-  date: timestamp("expires", { mode: "date" }).notNull(),
+  date: timestamp("date", { mode: "date" }).notNull(),
   userMentoringDataId: varchar("userMentoringDataId")
     .notNull()
     .references(() => userMentoringData.id, { onDelete: "cascade" }),

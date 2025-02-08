@@ -38,6 +38,10 @@ export const RegisterSchema = z
     }
   });
 
+export const RegisterMentorSchema = z.object({
+  
+})
+
 export const UpdateDataSchema = z
   .object({
     email: z.string().email({
