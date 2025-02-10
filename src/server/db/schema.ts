@@ -194,7 +194,7 @@ export const course = createTable("course", {
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   title: varchar("title", { length: 255 }).notNull(),
-  price: numeric("price", { precision: 15, scale: 0 }).notNull(),
+  price: numeric("price", { precision: 15, scale: 0 }),
   image: varchar("image", { length: 255 }),
   bannerImage: varchar("bannerImage", { length: 255 }),
   desc: text("desc"),
@@ -209,7 +209,7 @@ export const course = createTable("course", {
   salePrice: numeric("salePrice", { precision: 15, scale: 0 }),
   isWebinar: boolean("isWebinar").default(false),
   isFeatured: boolean("isFeatured").default(false),
-  isHidden: boolean("isHidden").default(false),
+  isHidden: boolean("isHidden").default(true),
   requireProofment: boolean("requireProofment").default(false),
   categoryId: varchar("categoryId")
     .notNull()

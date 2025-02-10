@@ -13,26 +13,26 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   {
     title: "Dashboard",
-    href: "/dashboard/user",
+    href: "/dashboard/admin",
     icon: "dashboard",
     label: "Dashboard",
   },
   {
     title: "All Course",
     href: "/dashboard/admin/courses",
-    icon: "user",
-    label: "user",
+    icon: "laptop",
+    label: "course",
   },
   {
     title: "All Mentor",
     href: "/dashboard/admin/mentors",
-    icon: "employee",
-    label: "employee",
+    icon: "user",
+    label: "mentor",
   },
   {
     title: "Settings",
     href: "/dashboard/admin/settings",
-    icon: "login",
-    label: "login",
+    icon: "settings",
+    label: "settings",
   },
 ];
