@@ -1,9 +1,10 @@
 "use client"
 
 import { type ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react"
+import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
 import Link from "next/link";
 
+import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
@@ -11,118 +12,113 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "~/components/ui/dropdown-menu";
-import { Badge } from "~/components/ui/badge";
-import { cn, currencyFormatter } from "~/lib/utils";
 import { type RouterOutputs } from "~/trpc/react";
-import { type category as CategoryCourse } from "~/server/db/schema";
 
-export const columns: ColumnDef<RouterOutputs["adminRoute"]["course"]["getAllCourse"][number]>[] = [
+type MentorCourse = RouterOutputs["adminRoute"]["mentor"]["getAll"][number]["courses"]
+type MentorMentoring = RouterOutputs["adminRoute"]["mentor"]["getAll"][number]["mentoring"]
+
+export const columns: ColumnDef<RouterOutputs["adminRoute"]["mentor"]["getAll"][number]>[] = [
   {
-    accessorKey: "title",
+    accessorKey: "name",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Title
+          Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
   },
   {
-    accessorKey: "category",
+    accessorKey: "company",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Category
+          Industry
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
-    },
-    cell: ({ row }) => {
-      type categoryType = typeof CategoryCourse.$inferSelect
-      const category: categoryType = row.getValue("category")
-
-      return (
-        <div>{category?.name??"Category"}</div>
       )
     }
   },
   {
-    accessorKey: "isHidden",
+    accessorKey: "industry",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Title
+          Industry
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    }
+  },
+  {
+    accessorKey: "expertise",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Expertise
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    }
+  },
+  {
+    accessorKey: "courses",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Course
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
     cell: ({ row }) => {
-      const isHidden = row.getValue("isHidden") || false;
+      const courseCount:MentorCourse = row.getValue("courses");
 
       return (
-        <Badge className={cn(
-          "bg-slate-500",
-          isHidden && "bg-primary"
-        )}>
-          {isHidden ? "Draft" : "Published"}
+        <Badge>
+          {courseCount.length}
         </Badge>
       )
     }
   },
   {
-    accessorKey: "isWebinar",
+    accessorKey: "mentoring",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Type
+          Mentoring Status
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
     cell: ({ row }) => {
-      const isWebinar = row.getValue("isWebinar") || false;
+      const isMentoring: MentorMentoring = row.getValue("mentoring");
 
       return (
-        <Badge className={cn(
-          "bg-slate-500",
-          isWebinar && "bg-primary"
-        )}>
-          {isWebinar ? "Webinar" : "Bootcamp"}
+        <Badge className={
+          (isMentoring === null) ? "bg-red-300" : "bg-slate-500"
+        }>
+          {(isMentoring === null) ? "Inactive" : "Active"}
         </Badge>
-      )
-    }
-  },
-  {
-    accessorKey: "price",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Price
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => {
-      const formattedPrice = currencyFormatter.format(Number(row.getValue("price"))) 
-
-      return (
-        <div>{formattedPrice}</div>
       )
     }
   },
