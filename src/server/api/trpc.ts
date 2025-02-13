@@ -11,14 +11,25 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import Xendit from "xendit-node";
+import Mux from "@mux/mux-node";
 
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 import { env } from "~/env";
 
-// Context
+/**
+ * Xendit context provider
+ */
 const xnd = new Xendit({
   secretKey: env.XENDIT_SECRET_KEY,
+});
+
+/**
+ * Mux video player
+ */
+export const muxClient = new Mux({
+  tokenId: env.MUX_TOKEN_ID,
+  tokenSecret: env.MUX_TOKEN_SECRET,
 });
 
 /**
@@ -39,6 +50,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
   return {
     db,
     xnd,
+    muxClient,
     session,
     ...opts,
   };

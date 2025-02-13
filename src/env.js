@@ -17,6 +17,8 @@ export const env = createEnv({
       .default("development"),
     XENDIT_PUBLIC_KEY: z.string(),
     XENDIT_SECRET_KEY: z.string(),
+    MUX_TOKEN_ID: z.string(),
+    MUX_TOKEN_SECRET: z.string(),
   },
 
   /**
@@ -38,6 +40,8 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     XENDIT_PUBLIC_KEY: process.env.XENDIT_PUBLIC_KEY,
     XENDIT_SECRET_KEY: process.env.XENDIT_SECRET_KEY,
+    MUX_TOKEN_ID: process.env.MUX_TOKEN_ID,
+    MUX_TOKEN_SECRET: process.env.MUX_TOKEN_SECRET
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

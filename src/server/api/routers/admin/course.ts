@@ -1,12 +1,12 @@
+import { TRPCError } from "@trpc/server";
 import { asc, desc, eq } from "drizzle-orm";
 import { category, chapter, course } from "~/server/db/schema";
-import { createTRPCRouter, protectedProcedure } from "../../trpc";
-import { TRPCError } from "@trpc/server";
 import {
   CourseIdSchema,
   CreateCourseTitleSchema,
   UpdateCourseSchema,
 } from "~/server/validator/course";
+import { createTRPCRouter, protectedProcedure } from "../../trpc";
 
 export const courseAdminRouter = createTRPCRouter({
   create: protectedProcedure
@@ -134,8 +134,8 @@ export const courseAdminRouter = createTRPCRouter({
         where: ((course, { eq }) => eq(course.id, input.courseId)),
         with: {
           chapters: {
-            orderBy: [asc(chapter.id)]
-          },
+            orderBy: [asc(chapter.position)]
+          }
         }
       }).execute()
 

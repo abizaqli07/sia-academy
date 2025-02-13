@@ -303,7 +303,7 @@ const UpdateCourseForm = ({
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Place URL (optional)</FormLabel>
+                    <FormLabel>Price</FormLabel>
                     <FormControl>
                       <Input
                         type="number"

@@ -1,4 +1,4 @@
-import { LayoutDashboard, ListChecks, Pencil } from "lucide-react";
+import { LayoutDashboard, ListChecks, Pencil, CircleDollarSign } from "lucide-react";
 import { redirect } from "next/navigation";
 import { Banner } from "~/components/ui/banner";
 import { IconBadge } from "~/components/ui/icon-badge";
@@ -9,6 +9,8 @@ import Link from "next/link";
 import { ImageForm } from "./_components/image-form";
 import { ImageBannerForm } from "./_components/image-banner-form";
 import { ScrollArea } from "~/components/ui/scroll-area";
+import { ChaptersForm } from "./_components/chapters-form";
+import { CourseSale } from "./_components/course-sale";
 
 const CourseDetailPage = async ({ params }: { params: { id: string } }) => {
   const course = await api.adminRoute.course.getOne({
@@ -44,7 +46,7 @@ const CourseDetailPage = async ({ params }: { params: { id: string } }) => {
       {course.isHidden && (
         <Banner label="This course is unpublished. It will not be visible to the students." />
       )}
-      <ScrollArea>
+      <ScrollArea className="h-full">
         <div className="p-6">
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-y-2">
@@ -85,18 +87,27 @@ const CourseDetailPage = async ({ params }: { params: { id: string } }) => {
               {/* Course Banner Image */}
               <ImageBannerForm initialData={course} courseId={course.id} />
             </div>
+
             <div className="space-y-6">
               <div>
                 <div className="flex items-center gap-x-2">
                   <IconBadge icon={ListChecks} />
                   <h2 className="text-xl">Course chapters</h2>
                 </div>
-                {/* <ChaptersForm
-                initialData={course}
-                courseId={course.id}
-              /> */}
+                <ChaptersForm initialData={course} courseId={course.id} />
               </div>
             </div>
+
+            <div className="space-y-6">
+              <div>
+                <div className="flex items-center gap-x-2">
+                  <IconBadge icon={CircleDollarSign} />
+                  <h2 className="text-xl">Course Pricing</h2>
+                </div>
+                <CourseSale initialData={{ isSale: course.isSale ?? false, price: course.price, salePrice: course.salePrice ?? "0" }} chapterId={course.id}/>
+              </div>
+            </div>
+
           </div>
         </div>
       </ScrollArea>
