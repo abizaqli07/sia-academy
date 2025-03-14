@@ -2,6 +2,12 @@ import { z } from "zod";
 import { createInsertSchema, createSchemaFactory } from "drizzle-zod";
 import { course } from "../db/schema";
 
+const { createUpdateSchema } = createSchemaFactory({
+  coerce: {
+    date: true
+  }
+})
+
 export const CourseIdSchema = z.object({
   courseId: z.string(),
 });
@@ -12,12 +18,6 @@ export const CreateCourseTitleSchema = z.object({
   }),
   categoryId: z.string(),
   isWebinar: z.boolean()
-})
-
-const { createUpdateSchema } = createSchemaFactory({
-  coerce: {
-    date: true
-  }
 })
 
 export const CreateCourseSchema = createInsertSchema(course, {

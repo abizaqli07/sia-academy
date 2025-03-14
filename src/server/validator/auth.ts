@@ -39,7 +39,31 @@ export const RegisterSchema = z
   });
 
 export const RegisterMentorSchema = z.object({
-  
+  email: z.string().email({
+    message: "Email invalid",
+  }),
+  password: z.string().min(8, {
+    message: "Password must be at least 8 character",
+  }),
+  confirmPassword: z.string().min(8, {
+    message: "Password must be at least 8 character",
+  }),
+  name: z.string().min(1, {
+    message: "Username required",
+  }),
+  title: z.string().min(1, {
+    message: "Title required",
+  }),
+  industry: z.string().min(1, {
+    message: "Industry required",
+  }),
+  company: z.string().nullable(),
+  expertise: z.string().min(1, {
+    message: "Expertise required",
+  }),
+  desc: z.string().min(1, {
+    message: "Description reqiored",
+  }),
 })
 
 export const UpdateDataSchema = z

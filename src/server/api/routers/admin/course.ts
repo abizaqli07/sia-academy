@@ -26,31 +26,33 @@ export const courseAdminRouter = createTRPCRouter({
         });
       }
     }),
-    update: protectedProcedure
+  update: protectedProcedure
     .input(UpdateCourseSchema)
     .mutation(async ({ ctx, input }) => {
-
-      const existed = await ctx.db.query.course.findFirst({
-        where: ((course, { eq }) => eq(course.id, input.id??""))
-      }).execute()
+      const existed = await ctx.db.query.course
+        .findFirst({
+          where: (course, { eq }) => eq(course.id, input.id ?? ""),
+        })
+        .execute();
 
       if (!existed) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Course Not Found"
-        })
+          message: "Course Not Found",
+        });
       }
 
-      const {id, ...res} = input;
+      const { id, ...res } = input;
 
-      const courses = await ctx.db.update(course)
+      const courses = await ctx.db
+        .update(course)
         .set({
           ...res,
         })
-        .where(eq(course.id, id??""))
-        .returning()
+        .where(eq(course.id, id ?? ""))
+        .returning();
 
-      return courses
+      return courses;
     }),
   unpublish: protectedProcedure
     .input(CourseIdSchema)
@@ -130,23 +132,25 @@ export const courseAdminRouter = createTRPCRouter({
   getOne: protectedProcedure
     .input(CourseIdSchema)
     .query(async ({ ctx, input }) => {
-      const courses = await ctx.db.query.course.findFirst({
-        where: ((course, { eq }) => eq(course.id, input.courseId)),
-        with: {
-          chapters: {
-            orderBy: [asc(chapter.position)]
-          }
-        }
-      }).execute()
+      const courses = await ctx.db.query.course
+        .findFirst({
+          where: (course, { eq }) => eq(course.id, input.courseId),
+          with: {
+            chapters: {
+              orderBy: [asc(chapter.position)],
+            },
+          },
+        })
+        .execute();
 
       if (!courses) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Course Not Found"
-        })
+          message: "Course Not Found",
+        });
       }
 
-      return courses
+      return courses;
     }),
   getAllCourse: protectedProcedure.query(async ({ ctx }) => {
     const courses = await ctx.db.query.course.findMany({

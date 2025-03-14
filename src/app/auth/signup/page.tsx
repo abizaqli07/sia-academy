@@ -90,7 +90,7 @@ const Register = () => {
               width={150}
               height={20}
             /> */}
-            <div className="text-center text-3xl font-bold">Techmodule.AI</div>
+            <div className="text-center text-3xl font-bold">SIA Academy</div>
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Create your account
             </h2>

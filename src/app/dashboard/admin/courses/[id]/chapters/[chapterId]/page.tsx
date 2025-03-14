@@ -11,11 +11,6 @@ import { ChapterTitleForm } from "./_components/chapter-title-form";
 import { ChapterDescriptionForm } from "./_components/chapter-description-form";
 import { ChapterVideoForm } from "./_components/chapter-video-form";
 
-// import { ChapterActions } from "./_components/chapter-actions";
-// import { ChapterDescriptionForm } from "./_components/chapter-description-form";
-// import { ChapterTitleForm } from "./_components/chapter-title-form";
-// import { ChapterVideoForm } from "./_components/chapter-video-form";
-
 const ChapterIdPage = () => {
   const params = useParams<{ id: string; chapterId: string }>();
   const { data: chapter, isLoading } = api.adminRoute.chapter.getOne.useQuery({
