@@ -65,6 +65,11 @@ const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
           ) : (
             ""
           )}
+          {data.course?.isWebinar === false && (
+            <Button onClick={ ()=> router.push(`/dashboard/user/my_course/${data.courseId}`)}>
+              Start Learning
+            </Button>
+          )}
         </div>
         <Separator />
         <div className="flex w-full items-center justify-between">

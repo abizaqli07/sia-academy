@@ -5,10 +5,14 @@ import { withUt } from "uploadthing/tw";
 export default withUt({
   darkMode: ["class"],
   content: ["./src/**/*.tsx"],
+  corePlugins: {
+    container: false
+  },
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        sans: ["var(--font-poppins)", ...fontFamily.sans],
+        inter: "var(--font-inter)"
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -29,6 +33,7 @@ export default withUt({
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          dark: "hsl(var(--primary-dark))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -81,5 +86,6 @@ export default withUt({
       },
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 }) satisfies Config;
