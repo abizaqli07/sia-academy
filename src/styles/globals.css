@@ -93,11 +93,11 @@
 
   /* ================ Main Menu Components =================== */
   .title__comp{
-    @apply w-[150px] h-[70px] rounded-full bg-gray-300 shrink-0
+    @apply w-[80px] h-[40px] md:w-[120px] md:h-[60px] lg:w-[150px] lg:h-[70px] rounded-full bg-gray-300 shrink-0
   }
 
   .footer__box{
-    @apply flex-[1] rounded-3xl bg-gray-100 w-full h-full p-6 flex flex-col justify-between
+    @apply md:flex-[1] rounded-3xl bg-gray-100 w-full h-full p-6 flex flex-col justify-between gap-y-8
   }
 
   /* ================== Swiper Components ==================== */

@@ -1,10 +1,9 @@
 "use client";
 
-import { ArrowUpRight, BookCheck, ChevronRight, Users } from "lucide-react";
+import { ArrowUpRight, BookCheck, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Button } from "~/components/ui/button";
 import { currencyFormatter } from "~/lib/utils";
 
 const tabs = [
@@ -25,10 +24,10 @@ const HomePage = () => {
     <div className="min-h-screen w-full">
       {/* ========== Hero ========== */}
       <section className="container mx-auto h-screen">
-        <div className="flex h-full w-full flex-col space-y-20 pt-52">
+        <div className="flex h-full w-full flex-col space-y-20 pt-32 md:pt-52">
           <div className="relative">
             {/* Main Header */}
-            <div className="relative z-10 flex flex-col items-center gap-12 text-[60px] font-semibold">
+            <div className="relative z-10 flex flex-col items-center gap-12 md:text-4xl lg:text-6xl text-3xl font-semibold">
               <div className="flex items-center gap-6">
                 Everything <div className="title__comp"></div> You
               </div>
@@ -39,10 +38,10 @@ const HomePage = () => {
             </div>
 
             {/* Main Image */}
-            <div className="absolute -top-[30px] left-0 z-0">
-              <div className="h-[550px] w-[300px] overflow-hidden rounded-br-[100px] rounded-tl-[100px] bg-primary">
-                <div className="h-[470px] w-full rounded-br-[100px] bg-gray-100"></div>
-                <div className="flex h-[80px] items-end p-4 text-sm font-semibold text-white">
+            <div className="absolute -top-[30px] left-0 z-0 hidden md:flex flex-col">
+              <div className="  h-[550px] w-[300px] overflow-hidden rounded-br-[100px] rounded-tl-[100px] bg-primary">
+                <div className=" h-[470px] w-full rounded-br-[100px] bg-gray-100"></div>
+                <div className="h-[80px] items-end p-4 md:text-sm text-xs font-semibold text-white">
                   Build Your <br /> Marketing Strategi
                 </div>
               </div>
@@ -50,7 +49,7 @@ const HomePage = () => {
           </div>
 
           {/* Main Desc */}
-          <div className="max-w-[300px] space-y-4 self-end text-left">
+          <div className="max-w-[300px] space-y-4 text-center self-center md:self-end md:text-left relative z-10">
             <div className="text-2xl font-medium">Lorem Ipsum</div>
             <div className="font-light">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -64,17 +63,17 @@ const HomePage = () => {
       <section className="container mx-auto mt-8">
         <div className="relative h-full w-full space-y-8">
           {/* Title */}
-          <div className="flex w-full flex-col items-center text-4xl">
+          <div className="flex w-full flex-col items-center text-2xl md:text-4xl">
             <div className="relative w-fit font-semibold">
               Creative{" "}
-              <span className="absolute -right-16 -top-[17px] h-[50px] w-[50px] rounded-br-full rounded-tl-full rounded-tr-full bg-primary"></span>
+              <span className="absolute -right-12 md:-right-16 -top-[17px] size-[40px] md:size-[50px] rounded-br-full rounded-tl-full rounded-tr-full bg-primary"></span>
             </div>
             <div className="w-fit">Digital Agency</div>
           </div>
 
           {/* Content */}
-          <div className="relative grid grid-cols-[1fr,_3fr,_1fr] gap-x-4">
-            <div className="flex flex-col justify-end gap-3 opacity-0">
+          <div className="relative flex flex-col md:grid md:grid-cols-[1fr,_3fr,_1fr] gap-x-4 space-y-8">
+            <div className="lg:flex flex-col justify-end gap-3 opacity-0 hidden">
               <div className="text-3xl font-medium">Our Story</div>
               <div className="font-light">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -83,9 +82,9 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div className="absolute bottom-0 left-6 flex max-w-[300px] flex-col justify-end gap-3">
-              <div className="text-3xl font-medium">Our Story</div>
-              <div className="font-light">
+            <div className="lg:absolute bottom-0 left-6 flex max-w-[300px] flex-col justify-end gap-3">
+              <div className="text-2xl md:text-3xl font-medium">Our Story</div>
+              <div className="font-light text-sm md:text-base">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud
@@ -93,10 +92,9 @@ const HomePage = () => {
             </div>
 
             <div className="flex justify-center">
-              <div className="relative h-fit w-fit">
+              <div className="relative h-full md:h-fit w-full">
                 <svg
-                  width="680"
-                  height="350"
+                  className="size-full"
                   viewBox="0 0 1058 515"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -109,29 +107,29 @@ const HomePage = () => {
                   />
                 </svg>
                 <Link href="/">
-                  <div className="absolute bottom-2 right-0 flex h-[70px] w-[310px] items-center justify-center gap-4 rounded-[30px] bg-gray-100 py-4">
-                    <div>Know More</div>
-                    <ArrowUpRight />
+                  <div className="absolute bottom-0 right-0 flex w-[45%] aspect-[4/1] items-center justify-center gap-4 rounded-3xl bg-gray-100 py-4">
+                    <div className=" text-sm">Know More</div>
+                    <ArrowUpRight className=" size-[15px]" />
                   </div>
                 </Link>
               </div>
             </div>
 
-            <div className="ml-4 flex flex-col items-start gap-8">
-              <div className="space-y-2">
-                <div className="text-6xl font-semibold">
-                  2 <span className="text-primary">+</span>
+            <div className="ml-4 flex flex-row md:flex-col items-start gap-8">
+              <div className=" flex-[1]">
+                <div className="text-4xl md:text-5xl font-semibold">
+                  10 <span className="text-primary">+</span>
                 </div>
                 <div className="font-light">Years of experience</div>
               </div>
-              <div className="space-y-2">
-                <div className="text-6xl font-semibold">
+              <div className=" flex-[1]">
+                <div className="text-4xl md:text-5xl font-semibold">
                   20 <span className="text-primary">+</span>
                 </div>
                 <div className="font-light">Projects Done</div>
               </div>
-              <div className="space-y-2">
-                <div className="text-6xl font-semibold">
+              <div className=" flex-[1]">
+                <div className="text-4xl md:text-5xl font-semibold">
                   30 <span className="text-primary">+</span>
                 </div>
                 <div className="font-light">Happy CLients</div>
@@ -145,10 +143,10 @@ const HomePage = () => {
       <section className="container mx-auto mt-48">
         <div className="relative h-full w-full space-y-8">
           {/* Title */}
-          <div className="flex w-full flex-col items-center text-4xl">
+          <div className="flex w-full flex-col items-center text-2xl md:text-4xl">
             <div className="relative w-fit font-semibold">
               Creative{" "}
-              <span className="absolute -right-16 -top-[17px] h-[50px] w-[50px] rounded-br-full rounded-tl-full rounded-tr-full bg-primary"></span>
+              <span className="absolute -right-12 md:-right-16 -top-[17px] size-[40px] md:size-[50px] rounded-br-full rounded-tl-full rounded-tr-full bg-primary"></span>
             </div>
             <div className="w-fit">Digital Agency</div>
           </div>
@@ -222,74 +220,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* =============== Footer =============== */}
-      <section className="container mx-auto mt-48">
-        <div className="flex h-[350px] w-full items-center justify-between gap-6">
-          {/* Grid 1 */}
-          <div className="footer__box">
-            <div className="space-y-2">
-              <div className="text-sm font-light">More Offers</div>
-              <div className="text-3xl font-semibold">
-                There is <br /> something else <br /> for you
-              </div>
-            </div>
-            <Button className="flex w-fit items-center gap-x-2">
-              Find More <ChevronRight />
-            </Button>
-          </div>
-          <div className="flex h-full w-full flex-[1] flex-col gap-y-6">
-            {/* Grid 2 */}
-            <div className="footer__box">
-              <div className="flex items-start justify-between">
-                <div className="text-sm font-light">
-                  Behold <br /> Our Greatnessess
-                </div>
-                <Link href="/">
-                  <ArrowUpRight />
-                </Link>
-              </div>
-              <div className="text-3xl font-semibold">View our projects</div>
-            </div>
-            <div className="flex w-full flex-[1] gap-6">
-              {/* Grid 3 */}
-              <div className="footer__box">
-                <div className="flex items-start justify-between">
-                  <div className="text-sm font-light">
-                    Discover <br /> Our History
-                  </div>
-                  <Link href="/">
-                    <ArrowUpRight />
-                  </Link>
-                </div>
-                <div className="text-3xl font-semibold">About Us</div>
-              </div>
-              {/* Grid 4 */}
-              <div className="footer__box">
-                <div className="flex items-start justify-between">
-                  <div className="text-sm font-light">
-                    Have Some <br />
-                    Question?
-                  </div>
-                  <Link href="/">
-                    <ArrowUpRight />
-                  </Link>
-                </div>
-                <div className="text-sm font-light">
-                  Have Some <br />
-                  Question?
-                </div>
-                <div className="text-3xl font-semibold">Contact Us</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="container mx-auto my-8">
-        <div className="w-full text-center text-sm font-light text-gray-500">
-          Copyright &#169; 2025 Linkup Digital. All right reserved
-        </div>
-      </section>
     </div>
   );
 };

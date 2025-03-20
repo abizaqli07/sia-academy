@@ -128,6 +128,9 @@ importers:
       lucide-react:
         specifier: ^0.462.0
         version: 0.462.0(react@18.3.1)
+      moment:
+        specifier: ^2.30.1
+        version: 2.30.1
       next:
         specifier: ^15.1.6
         version: 15.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3319,6 +3322,9 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+
+  moment@2.30.1:
+    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
 
   motion-dom@12.0.0:
     resolution: {integrity: sha512-CvYd15OeIR6kHgMdonCc1ihsaUG4MYh/wrkz8gZ3hBX/uamyZCXN9S9qJoYF03GqfTt7thTV/dxnHYX4+55vDg==}
@@ -7302,6 +7308,8 @@ snapshots:
       yallist: 4.0.0
 
   mkdirp@1.0.4: {}
+
+  moment@2.30.1: {}
 
   motion-dom@12.0.0:
     dependencies:
