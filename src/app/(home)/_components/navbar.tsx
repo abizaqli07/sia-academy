@@ -94,9 +94,9 @@ const Navbar = ({ session }: NavbarProps) => {
 
         <div className="hidden md:flex">
           {session == null ? (
-            <Button onClick={() => void signIn()} className="">
-              Sign In
-            </Button>
+            <Link href="/auth/signin">
+              <Button>Sign In</Button>
+            </Link>
           ) : (
             <Link href={"/dashboard/user"}>
               <Button>Dashboard</Button>
@@ -121,7 +121,7 @@ const Navbar = ({ session }: NavbarProps) => {
               exit="offscreen"
             >
               <div
-                className="text-primary-dark absolute right-8 top-8 cursor-pointer text-3xl font-bold transition-colors duration-200 ease-out hover:text-primary sm:right-12"
+                className="absolute right-8 top-8 cursor-pointer text-3xl font-bold text-primary-dark transition-colors duration-200 ease-out hover:text-primary sm:right-12"
                 onClick={() => handleActive(active)}
               >
                 <FaArrowRightFromBracket />
@@ -145,9 +145,9 @@ const Navbar = ({ session }: NavbarProps) => {
                 >
                   <Link
                     href={"/mentoring"}
-                    className={`text-base font-semibold ${pathname === "/mentoring" ? "border-b-2 border-primary text-primary" : "text-primary-dark"}`}
+                    className={`text-base font-semibold ${pathname === "/about_us" ? "border-b-2 border-primary text-primary" : "text-primary-dark"}`}
                   >
-                    Mentoring
+                    About Us
                   </Link>
                 </motion.div>
                 <motion.div
@@ -167,9 +167,9 @@ const Navbar = ({ session }: NavbarProps) => {
                 >
                   <Link
                     href={"/webinar"}
-                    className={`text-base font-semibold ${pathname === "/webinar" ? "border-b-2 border-primary text-primary" : "text-primary-dark"}`}
+                    className={`text-base font-semibold ${pathname === "/join_us" ? "border-b-2 border-primary text-primary" : "text-primary-dark"}`}
                   >
-                    Free Webinar
+                    Join Us
                   </Link>
                 </motion.div>
                 <motion.div
@@ -182,7 +182,7 @@ const Navbar = ({ session }: NavbarProps) => {
                         Sign In
                       </Button>
                     ) : (
-                      <Link href={"/dashboard/user"}>
+                      <Link href={"/redirect"}>
                         <Button>Dashboard</Button>
                       </Link>
                     )}

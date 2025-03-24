@@ -8,7 +8,7 @@ const AboutUsPage = () => {
         <div className="flex h-full w-full flex-col gap-20">
           <div className="flex flex-col md:flex-row flex-[3] items-center gap-y-12 md:justify-between">
             {/* Main Title */}
-            <div className="flex max-w-[500px] flex-col items-start gap-12 self-start md:self-end text-4xl md:text-5xl font-semibold">
+            <div className="flex max-w-[500px] flex-col items-start gap-12 self-start md:self-end text-3xl md:text-5xl font-semibold">
               <div className="flex items-center gap-6">
                 Unleash <div className="title__comp"></div>
               </div>
@@ -45,7 +45,7 @@ const AboutUsPage = () => {
         <div className="flex w-full justify-end h-fit relative">
           {/* Desc */}
           <div className="flex max-w-[900px] h-fit flex-col gap-8 absolute bottom-0 left-0">
-            <div className="w-fit border-b-4 border-primary pb-4 text-[80px] font-light">
+            <div className="w-fit border-b-4 border-primary pb-4 text-5xl md:text-7xl lg:text-8xl font-light">
               What We Say <br /> About Our Self
             </div>
             <div className="flex items-start justify-start gap-4">

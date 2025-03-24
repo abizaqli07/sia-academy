@@ -1,12 +1,11 @@
 import { redirect } from "next/navigation";
 import { api } from "~/trpc/server";
-import CourseDetailSection from "./components/course_detail_section";
 
 export const dynamicParams = true;
 export const dynamic = 'force-dynamic'
 
 const MyCourseDetailPage = async ({ params }: { params: { id: string } }) => {
-  const detail = await api.userRoute.course.getOneCourse({
+  const detail = await api.userRoute.course.getOneMyCourse({
     courseId: params.id,
   });
 
@@ -14,12 +13,7 @@ const MyCourseDetailPage = async ({ params }: { params: { id: string } }) => {
     redirect("/404")
   }
 
-  return (
-    <div>
-      <div className="absolute left-0 top-0 -z-10 h-[25vh] w-full bg-primary-dark"></div>
-      <CourseDetailSection data={detail} />
-    </div>
-  );
+  return redirect(`/dashboard/user/my_course/${detail.id}/${detail.chapters[0]?.id}`)
 };
 
 export default MyCourseDetailPage;

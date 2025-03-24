@@ -9,9 +9,9 @@ const JoinUsPage = () => {
 
   return (
     <div className="w-full">
-      <section className="container mx-auto mt-[14vh] h-[86vh]">
-        <div className="flex h-[80vh] w-full gap-8">
-          <div className="flex h-full flex-[3] flex-col gap-8 bg-gray-100">
+      <section className="container mx-auto mt-[14vh] min-h-[86vh]">
+        <div className="flex h-[80vh] w-full gap-8 flex-col-reverse md:flex-row">
+          <div className="flex h-full md:flex-[3] flex-col gap-8 bg-gray-100">
             <div className="w-full flex-[4] rounded-2xl bg-gray-200 p-4">
               
             </div>
@@ -45,8 +45,8 @@ const JoinUsPage = () => {
               </div>
             </div>
           </div>
-          <div className="h-full flex-[2] rounded-2xl bg-gray-100 p-3">
-            <div className="mr-auto flex h-full w-[70%] rounded-xl bg-white justify-between flex-col p-4">
+          <div className="h-full md:flex-[2] rounded-2xl bg-gray-100 p-3">
+            <div className="mr-auto flex h-full w-[100%] md:w-[70%] rounded-xl bg-white justify-between flex-col p-4">
               <div>
                 <div className=" text-5xl">{dayOfWeek}</div>
                 <div className=" text-4xl text-gray-500">{dayOfMonth}</div>
