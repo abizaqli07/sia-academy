@@ -26,6 +26,11 @@ export const courseLevel = pgEnum("courseLevel", [
   "INTERMEDIATE",
   "EXPERT",
 ]);
+export const requestStatus = pgEnum("requestStatus", [
+  "PENDING",
+  "ACCEPTED",
+  "DENIED",
+]);
 
 export const createTable = pgTableCreator((name) => `sia_${name}`);
 
@@ -269,45 +274,49 @@ export const coursesToMentorsRelations = relations(
   }),
 );
 
-export const chapter = createTable("chapter",
-  {
-    id: varchar("id", { length: 255 })
+export const chapter = createTable("chapter", {
+  id: varchar("id", { length: 255 })
     .notNull()
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-    title: varchar("title", { length: 256 }).notNull(),
-    description: text("description"),
-    videoUrl: text("videoUrl"),
-    position: integer("position").notNull().default(0),
-    isPublished: boolean("isPublished").notNull().default(false),
-    courseId: varchar("courseId").notNull().references(() => course.id),
-    createdAt: timestamp("created_at")
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updatedAt").default(sql`CURRENT_TIMESTAMP`).notNull(),
-  });
+  title: varchar("title", { length: 256 }).notNull(),
+  description: text("description"),
+  videoUrl: text("videoUrl"),
+  position: integer("position").notNull().default(0),
+  isPublished: boolean("isPublished").notNull().default(false),
+  courseId: varchar("courseId")
+    .notNull()
+    .references(() => course.id),
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updatedAt")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+});
 
 export const chapterRelations = relations(chapter, ({ one }) => ({
   muxData: one(muxData, {
     fields: [chapter.id],
-    references: [muxData.chapterId]
+    references: [muxData.chapterId],
   }),
   course: one(course, {
     fields: [chapter.courseId],
-    references: [course.id]
+    references: [course.id],
   }),
-}))
+}));
 
-export const muxData = createTable("muxData",
-  {
-    id: varchar("id", { length: 255 })
+export const muxData = createTable("muxData", {
+  id: varchar("id", { length: 255 })
     .notNull()
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
-    assetId: text("assetId").notNull(),
-    playbackId: text("playbackId"),
-    chapterId: varchar("chapterId").notNull().references(() => chapter.id)
-  })
+  assetId: text("assetId").notNull(),
+  playbackId: text("playbackId"),
+  chapterId: varchar("chapterId")
+    .notNull()
+    .references(() => chapter.id),
+});
 
 export const codePromo = createTable("codePromo", {
   id: varchar("id", { length: 255 })
@@ -385,6 +394,7 @@ export const mentoring = createTable("mentoring", {
   price: numeric("price", { precision: 15, scale: 0 }).notNull(),
   isFeatured: boolean("isFeatured").default(false),
   isHidden: boolean("isHidden").default(false),
+  status: requestStatus("status").default("PENDING"),
   mentorId: varchar("mentorId")
     .notNull()
     .references(() => mentor.id, { onDelete: "cascade" }),
@@ -470,9 +480,17 @@ export const mentoringSchedule = createTable("mentoringSchedule", {
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   date: timestamp("date", { mode: "date" }).notNull(),
+  status: requestStatus("status").default("PENDING"),
+  message: text("message"),
   userMentoringDataId: varchar("userMentoringDataId")
     .notNull()
     .references(() => userMentoringData.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updatedAt")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
 });
 
 export const mentoringScheduleRelations = relations(

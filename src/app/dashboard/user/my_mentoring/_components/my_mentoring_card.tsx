@@ -2,36 +2,41 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { type RouterOutputs } from "~/trpc/react";
+import { Badge } from "~/components/ui/badge";
+import { Button } from "~/components/ui/button";
+import { Separator } from "~/components/ui/separator";
+import { api, type RouterOutputs } from "~/trpc/react";
+import RequestButton from "./request_button";
+import { Skeleton } from "~/components/ui/skeleton";
 
 interface MyMentoringCardPropsInterface {
   data: RouterOutputs["userRoute"]["mentoring"]["getAllMyMentoring"][number];
 }
 
 const MyMentoringCard = ({ data }: MyMentoringCardPropsInterface) => {
-  // const { data: invoiceData, isLoading } =
-  //   api.userRoute.purchase.getInvoiceData.useQuery({
-  //     invoiceId: data.invoiceId ?? "",
-  //   });
+  const {
+    data: recentSession,
+    isLoading,
+    isError,
+  } = api.userRoute.mentoring.getRecentSession.useQuery({
+    mentoringDataId: data.mentoringId ?? "",
+  });
 
-  // let status = "";
+  if (isLoading) {
+    return (
+      <div className="mx-w-[500px] aspect-[4/2] w-full">
+        <Skeleton className="h-full w-full rounded-lg" />
+      </div>
+    );
+  }
 
-  // if (invoiceData?.status === undefined) {
-  //   status = "Loading";
-  // } else if (invoiceData?.status === "PAID") {
-  //   status = "Payment Completed";
-  // }
-
-  // if (isLoading) {
-  //   return <UserDashboardSkeleton />;
-  // }
+  if (isError) {
+    return <div>Error</div>;
+  }
 
   return (
-    <Link
-      href={`/mentoring/${data.mentoring?.mentoringId}`}
-      className="relative flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 md:flex-row"
-    >
-      <div className="md:absolute right-0 top-0 rounded-lg md:rounded-br-none md:rounded-tl-none bg-primary px-4 py-2 font-semibold text-white">
+    <div className="relative flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 md:flex-row">
+      <div className="right-0 top-0 rounded-lg bg-primary px-4 py-2 font-semibold text-white md:absolute md:rounded-br-none md:rounded-tl-none">
         Mentoring
       </div>
       <div className="relative aspect-[1/1] w-full flex-[2] shrink-0 overflow-hidden rounded-lg bg-primary md:aspect-[1/1] md:max-w-[280px]">
@@ -64,32 +69,26 @@ const MyMentoringCard = ({ data }: MyMentoringCardPropsInterface) => {
               </div>
             ))}
         </div>
-        <div className="text-justify text-gray-700">
-          {data.mentoring?.mentoring?.mentor?.desc}
-        </div>
-        {/* {invoiceData?.status === "PAID" || invoiceData?.status === "SETTLED" ? (
-          <Link href={"https://wa.me/628179922903"} className="w-full">
-            <Button className="w-full">Request Session</Button>
-          </Link>
-        ) : (
-          <></>
+        {data.status === "PURCHASED" && (
+          <RequestButton mentoringDataId={data.mentoringId??""} schedules={recentSession}/>
         )}
         <Separator />
         <div className="flex w-full items-center justify-between">
           <div className="font-medium">Status</div>
-          {invoiceData?.status === "PAID" ||
-          invoiceData?.status === "SETTLED" ? (
-            <Badge>{status}</Badge>
-          ) : invoiceData?.status === "EXPIRED" ? (
-            <Badge variant={"destructive"}>Expired</Badge>
+          {data?.status === "FREE" ? (
+            <Badge>Free</Badge>
+          ) : data?.status === "PURCHASED" ? (
+            <Badge>Payment Complete</Badge>
+          ) : data?.status === "PENDING" ? (
+            <Badge>Pending</Badge>
           ) : (
             <Link href={data?.invoiceUrl ?? ""}>
               <Button>Payout</Button>
             </Link>
           )}
-        </div> */}
+        </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

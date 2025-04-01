@@ -1,9 +1,15 @@
 import { desc } from "drizzle-orm";
 import { createTRPCRouter, protectedProcedure } from "../../trpc";
-import { mentoring, userMentoringData } from "~/server/db/schema";
+import {
+  mentoring,
+  mentoringSchedule,
+  userMentoringData,
+} from "~/server/db/schema";
 import {
   MentoringIdSchema,
   RegisterUserDataMentoringSchema,
+  RequestSessionSchema,
+  UserMentoringDataIdSchema,
 } from "~/server/validator/mentoring";
 import { TRPCError } from "@trpc/server";
 
@@ -75,7 +81,7 @@ export const mentoringRouter = createTRPCRouter({
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: `Some error occured`,
-          cause: error
+          cause: error,
         });
       }
     }),
@@ -103,4 +109,45 @@ export const mentoringRouter = createTRPCRouter({
 
     return purchases;
   }),
+  requestSession: protectedProcedure
+    .input(RequestSessionSchema)
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const requestSchedule = await ctx.db
+          .insert(mentoringSchedule)
+          .values({
+            userMentoringDataId: input.mentoringDataId,
+            date: input.date,
+          })
+          .returning();
+
+        return requestSchedule;
+      } catch (error) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: `Some error occured`,
+          cause: error,
+        });
+      }
+    }),
+  getRecentSession: protectedProcedure
+    .input(UserMentoringDataIdSchema)
+    .query(async ({ ctx, input }) => {
+
+        const mentoringSession = await ctx.db.query.userMentoringData.findFirst(
+          {
+            where: (userMentoringData, { eq }) =>
+              eq(userMentoringData.id, input.mentoringDataId),
+            with: {
+              schedules: {
+                limit: 1,
+                orderBy: [desc(mentoringSchedule.createdAt)],
+              },
+            },
+          },
+        );
+
+        return mentoringSession;
+
+    }),
 });

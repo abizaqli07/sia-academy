@@ -1,15 +1,19 @@
 import { createSchemaFactory } from "drizzle-zod";
 import { z } from "zod";
-import { mentoring } from "../db/schema";
+import { mentoring, mentoringSchedule } from "../db/schema";
 
 const { createUpdateSchema } = createSchemaFactory({
   coerce: {
-    date: true
-  }
-})
+    date: true,
+  },
+});
 
 export const MentoringIdSchema = z.object({
   mentoringId: z.string(),
+});
+
+export const UserMentoringDataIdSchema = z.object({
+  mentoringDataId: z.string(),
 });
 
 export const RegisterUserDataMentoringSchema = z.object({
@@ -37,4 +41,15 @@ export const RegisterMentoringSchema = z.object({
   price: z.string(),
 });
 
-export const UpdateMentoringSchema = createUpdateSchema(mentoring)
+export const UpdateMentoringSchema = createUpdateSchema(mentoring);
+
+export const RequestSessionSchema = z.object({
+  mentoringDataId: z.string().min(1, {
+    message: "Required",
+  }),
+  date: z.date()
+});
+
+export const ResponseSessionSchema = createUpdateSchema(mentoringSchedule, {
+  userMentoringDataId: z.string()
+})

@@ -4,17 +4,23 @@ import { redirect } from "next/navigation";
 import { auth } from "~/server/auth";
 
 export const dynamicParams = true;
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
-const Aimasterclass = async ({ params }: { params: { id: string } }) => {
+const Aimasterclass = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const { id } = await params;
+
   const mentoring = await api.userRoute.mentoring.getOneMentoring({
-    mentoringId: params.id,
+    mentoringId: id,
   });
 
   const session = await auth();
 
-  if(!mentoring){
-    redirect("/404")
+  if (!mentoring) {
+    redirect("/404");
   }
 
   return (
