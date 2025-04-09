@@ -98,7 +98,7 @@ const Navbar = ({ session }: NavbarProps) => {
               <Button>Sign In</Button>
             </Link>
           ) : (
-            <Link href={"/dashboard/user"}>
+            <Link href={"/redirect"}>
               <Button>Dashboard</Button>
             </Link>
           )}

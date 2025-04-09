@@ -112,11 +112,17 @@ export const menteeRouter = createTRPCRouter({
           .set({
             ...res,
           })
-          .where(eq(userMentoringData.id, input.userMentoringDataId))
+          .where(
+            eq(
+              mentoringSchedule.userMentoringDataId,
+              input.userMentoringDataId,
+            ),
+          )
           .returning();
 
         return responseSchedule;
       } catch (error) {
+        console.log(error);
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: `Some error occured`,
