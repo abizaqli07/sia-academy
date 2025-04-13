@@ -16,7 +16,7 @@
     --primary-foreground: 210 40% 98%;
     --primary-dark: 243 23% 15%;
 
-    --secondary: 210 40% 96.1%;
+    --secondary: 46 100% 50%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
@@ -93,11 +93,15 @@
 
   /* ================ Main Menu Components =================== */
   .title__comp{
-    @apply w-[80px] h-[40px] md:w-[120px] md:h-[60px] lg:w-[150px] lg:h-[70px] rounded-full bg-gray-300 shrink-0
+    @apply w-[100px] md:w-[150px] lg:w-[170px] aspect-[4/2] rounded-full bg-gray-300 shrink-0 relative overflow-hidden
   }
 
   .footer__box{
     @apply md:flex-[1] rounded-3xl bg-gray-100 w-full h-full p-6 flex flex-col justify-between gap-y-8
+  }
+
+  .about__svg{
+    background-image: url("/public/images/hero/bg_2.jpg");
   }
 
   /* ================== Swiper Components ==================== */

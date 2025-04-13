@@ -1,5 +1,9 @@
 import { desc } from "drizzle-orm";
-import { createTRPCRouter, protectedProcedure } from "../../trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "../../trpc";
 import {
   mentoring,
   mentoringSchedule,
@@ -14,6 +18,18 @@ import {
 import { TRPCError } from "@trpc/server";
 
 export const mentoringRouter = createTRPCRouter({
+  getFeaturedMentoring: publicProcedure.query(async ({ ctx }) => {
+    const featuredMentoring = await ctx.db.query.mentoring.findMany({
+      where: (mentoring, { eq }) => eq(mentoring.isFeatured, true),
+      with: {
+        category: true,
+        mentor: true,
+      },
+      orderBy: [desc(mentoring.createdAt)],
+    });
+
+    return featuredMentoring;
+  }),
   getAllMentoring: protectedProcedure.query(async ({ ctx }) => {
     const allMentoring = await ctx.db.query.mentoring.findMany({
       with: {
@@ -133,21 +149,17 @@ export const mentoringRouter = createTRPCRouter({
   getRecentSession: protectedProcedure
     .input(UserMentoringDataIdSchema)
     .query(async ({ ctx, input }) => {
-
-        const mentoringSession = await ctx.db.query.userMentoringData.findFirst(
-          {
-            where: (userMentoringData, { eq }) =>
-              eq(userMentoringData.id, input.mentoringDataId),
-            with: {
-              schedules: {
-                limit: 1,
-                orderBy: [desc(mentoringSchedule.createdAt)],
-              },
-            },
+      const mentoringSession = await ctx.db.query.userMentoringData.findFirst({
+        where: (userMentoringData, { eq }) =>
+          eq(userMentoringData.id, input.mentoringDataId),
+        with: {
+          schedules: {
+            limit: 1,
+            orderBy: [desc(mentoringSchedule.createdAt)],
           },
-        );
+        },
+      });
 
-        return mentoringSession;
-
+      return mentoringSession;
     }),
 });

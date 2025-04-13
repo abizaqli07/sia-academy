@@ -9,6 +9,18 @@ import {
 } from "../../trpc";
 
 export const courseRouter = createTRPCRouter({
+  getFeaturedCourse: publicProcedure.query(async ({ ctx }) => {
+    const bootcamps = await ctx.db.query.course.findMany({
+      where: (course, { eq }) => eq(course.isFeatured, true),
+      with: {
+        category: true,
+        purchases: true,
+      },
+      orderBy: [desc(course.createdAt)],
+    });
+
+    return bootcamps;
+  }),
   getAllCourse: protectedProcedure.query(async ({ ctx }) => {
     const courses = await ctx.db.query.course.findMany({
       with: {
@@ -78,8 +90,8 @@ export const courseRouter = createTRPCRouter({
       const chapters = await ctx.db.query.chapter.findFirst({
         where: (chapter, { eq }) => eq(chapter.id, input.chapterId),
         with: {
-          muxData: true
-        }
+          muxData: true,
+        },
       });
 
       return chapters;
