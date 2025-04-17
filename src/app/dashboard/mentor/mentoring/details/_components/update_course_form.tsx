@@ -35,7 +35,7 @@ import {
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { Textarea } from "~/components/ui/textarea";
 import { cn } from "~/lib/utils";
-import { UpdateMentoringSchema } from "~/server/validator/mentoring";
+import { UpdateMentoringAltSchema } from "~/server/validator/mentoring";
 
 interface UpdateCourseInterface {
   mentoringData: RouterOutputs["mentorRoute"]["mentoring"]["getData"];
@@ -67,8 +67,8 @@ const UpdateCourseForm = ({
 
   const initialData = mentoringData?.mentoring;
 
-  const form = useForm<z.infer<typeof UpdateMentoringSchema>>({
-    resolver: zodResolver(UpdateMentoringSchema),
+  const form = useForm<z.infer<typeof UpdateMentoringAltSchema>>({
+    resolver: zodResolver(UpdateMentoringAltSchema),
     defaultValues: {
       id: initialData?.id,
       categoryId: initialData?.categoryId,
@@ -82,7 +82,7 @@ const UpdateCourseForm = ({
 
   const { isSubmitting, isValid } = form.formState;
 
-  const onSubmit = (values: z.infer<typeof UpdateMentoringSchema>) => {
+  const onSubmit = (values: z.infer<typeof UpdateMentoringAltSchema>) => {
     course.mutate(values);
   };
 

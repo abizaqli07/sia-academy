@@ -42,6 +42,9 @@ export const RegisterMentoringSchema = z.object({
 });
 
 export const UpdateMentoringSchema = createUpdateSchema(mentoring);
+export const UpdateMentoringAltSchema = createUpdateSchema(mentoring, {
+  desc: z.string()
+});
 
 export const RequestSessionSchema = z.object({
   mentoringDataId: z.string().min(1, {
@@ -51,5 +54,6 @@ export const RequestSessionSchema = z.object({
 });
 
 export const ResponseSessionSchema = createUpdateSchema(mentoringSchedule, {
-  userMentoringDataId: z.string()
+  userMentoringDataId: z.string(),
+  message: z.string()
 })

@@ -4,9 +4,9 @@ import { course } from "../db/schema";
 
 const { createUpdateSchema } = createSchemaFactory({
   coerce: {
-    date: true
-  }
-})
+    date: true,
+  },
+});
 
 export const CourseIdSchema = z.object({
   courseId: z.string(),
@@ -14,11 +14,11 @@ export const CourseIdSchema = z.object({
 
 export const CreateCourseTitleSchema = z.object({
   title: z.string().min(1, {
-    message: "Title required"
+    message: "Title required",
   }),
   categoryId: z.string(),
-  isWebinar: z.boolean()
-})
+  isWebinar: z.boolean(),
+});
 
 export const CreateCourseSchema = createInsertSchema(course, {
   title: z.string().min(1, {
@@ -56,7 +56,15 @@ export const CreateCourseSchema = createInsertSchema(course, {
   requireProofment: z.boolean(),
 });
 
-export const UpdateCourseSchema = createUpdateSchema(course)
+export const UpdateCourseSchema = createUpdateSchema(course);
+export const UpdateCourseAltSchema = createUpdateSchema(course, {
+  titleDesc: z.string(),
+  desc: z.string(),
+  materi: z.string(),
+  place: z.string(),
+  placeUrl: z.string(),
+  price: z.string(),
+});
 
 export const idCourse = z.object({
   id: z.string().uuid(),

@@ -57,7 +57,7 @@ export const RegisterMentorSchema = z.object({
   industry: z.string().min(1, {
     message: "Industry required",
   }),
-  company: z.string().nullable(),
+  company: z.string(),
   expertise: z.string().min(1, {
     message: "Expertise required",
   }),

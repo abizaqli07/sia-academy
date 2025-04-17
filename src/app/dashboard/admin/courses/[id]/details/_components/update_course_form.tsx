@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { type z } from "zod";
 import { useToast } from "~/hooks/use-toast";
-import { UpdateCourseSchema } from "~/server/validator/course";
+import { UpdateCourseAltSchema } from "~/server/validator/course";
 import { api, type RouterOutputs } from "~/trpc/react";
 
 import { Button } from "~/components/ui/button";
@@ -84,8 +84,8 @@ const UpdateCourseForm = ({
     ...res
   } = initialData;
 
-  const form = useForm<z.infer<typeof UpdateCourseSchema>>({
-    resolver: zodResolver(UpdateCourseSchema),
+  const form = useForm<z.infer<typeof UpdateCourseAltSchema>>({
+    resolver: zodResolver(UpdateCourseAltSchema),
     defaultValues: {
       id: res.id,
       categoryId: res.categoryId,
@@ -108,7 +108,7 @@ const UpdateCourseForm = ({
 
   const { isSubmitting, isValid } = form.formState;
 
-  const onSubmit = (values: z.infer<typeof UpdateCourseSchema>) => {
+  const onSubmit = (values: z.infer<typeof UpdateCourseAltSchema>) => {
     course.mutate(values);
   };
 
