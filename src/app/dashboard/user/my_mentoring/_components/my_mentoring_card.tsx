@@ -35,8 +35,8 @@ const MyMentoringCard = ({ data }: MyMentoringCardPropsInterface) => {
   }
 
   return (
-    <div className="relative flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 md:flex-row">
-      <div className="right-0 top-0 rounded-lg bg-primary px-4 py-2 font-semibold text-white md:absolute md:rounded-br-none md:rounded-tl-none">
+    <div className="relative flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 md:flex-row max-w-[500px]">
+      <div className="left-0 top-0 rounded-lg bg-primary px-4 py-2 font-semibold text-white md:absolute md:rounded-bl-none md:rounded-tr-none z-30">
         Mentoring
       </div>
       <div className="relative aspect-[1/1] w-full flex-[2] shrink-0 overflow-hidden rounded-lg bg-primary md:aspect-[1/1] md:max-w-[280px]">

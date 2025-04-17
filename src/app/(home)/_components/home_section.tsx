@@ -42,32 +42,32 @@ const HomeSection = ({
             {/* Main Header */}
             <div className="relative z-10 flex flex-col items-center gap-12 text-3xl font-semibold md:text-4xl lg:text-6xl">
               <div className="flex items-center gap-6">
-                Everything{" "}
+                Semua{" "}
                 <div className="title__comp">
                   {" "}
                   <Image src="/images/hero/image_2.jpg" alt="Image" fill />
                 </div>{" "}
-                You
+                Yang Kamu
               </div>
               <div className="flex items-center gap-6">
-                Need{" "}
+                Butuhkan Untuk{" "}
                 <div className="title__comp">
                   <Image src="/images/hero/image_4.jpg" alt="Image" fill />
                 </div>{" "}
-                To Delve Your
+                Menggali
               </div>
-              <div className="flex items-center gap-6">Talent & Skill</div>
+              <div className="flex items-center gap-6">Potensi & Bakatmu</div>
             </div>
 
             {/* Main Image */}
             <div className="absolute -top-[30px] left-0 z-0 hidden flex-col md:flex">
-              <div className="h-[500px] w-[320px] overflow-hidden rounded-br-[100px] rounded-tl-[100px] bg-primary">
+              <div className="h-[490px] w-[320px] overflow-hidden rounded-br-[100px] rounded-tl-[100px] bg-primary">
                 <div className="relative h-[410px] w-full overflow-hidden rounded-br-[100px] bg-gray-100">
                   <Image src="/images/hero/hero.jpg" alt="Main Image" fill />
-                  <div className="absolute bottom-0 left-0 right-0 top-0 bg-white/50"></div>
+                  <div className="absolute bottom-0 left-0 right-0 top-0 bg-white/30"></div>
                 </div>
                 <div className="h-[80px] items-end p-4 text-xs font-semibold text-white md:text-sm">
-                  Build Your <br /> Marketing Strategi
+                  Bangun <br /> Masa Depanmu
                 </div>
               </div>
             </div>
@@ -75,10 +75,11 @@ const HomeSection = ({
 
           {/* Main Desc */}
           <div className="relative z-10 max-w-[300px] space-y-4 self-center text-center md:self-end md:text-left">
-            <div className="text-2xl font-medium">Lorem Ipsum</div>
+            <div className="text-2xl font-medium">Memberi Hasil Terbaik</div>
             <div className="font-light">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna.
+              Full Online dan Dipandu oleh Praktisi Senior. Praktikal, lebih
+              dari sekadar Webinar. Fokus Bantu Kembangkan Skill dan Portfolio
+              Ribuan Alumni.
             </div>
           </div>
         </div>
@@ -90,29 +91,33 @@ const HomeSection = ({
           {/* Title */}
           <div className="flex w-full flex-col items-center text-2xl md:text-4xl">
             <div className="relative w-fit font-semibold">
-              Creative{" "}
+              Tentang{" "}
               <span className="absolute -right-12 -top-[17px] size-[40px] rounded-br-full rounded-tl-full rounded-tr-full bg-primary md:-right-16 md:size-[50px]"></span>
             </div>
-            <div className="w-fit">Digital Agency</div>
+            <div className="w-fit">SIA Academy</div>
           </div>
 
           {/* Content */}
           <div className="relative flex flex-col gap-x-4 space-y-8 md:grid md:grid-cols-[1fr,_3fr,_1fr]">
             <div className="hidden flex-col justify-end gap-3 opacity-0 lg:flex">
-              <div className="text-3xl font-medium">Our Story</div>
+              <div className="text-3xl font-medium">Cerita Kami</div>
               <div className="font-light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud
+                Di Sia Academy, kami hadir sebagai platform career mentoring dan
+                bootcamp yang dirancang untuk membekali Anda dengan keterampilan
+                praktis, wawasan industri, dan dukungan langsung dari
+                mentor-mentor profesional.
               </div>
             </div>
 
             <div className="bottom-0 left-6 flex max-w-[300px] flex-col justify-end gap-3 lg:absolute">
-              <div className="text-2xl font-medium md:text-3xl">Our Story</div>
+              <div className="text-2xl font-medium md:text-3xl">
+                Cerita Kami
+              </div>
               <div className="text-sm font-light md:text-base">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud
+                Di Sia Academy, kami hadir sebagai platform career mentoring dan
+                bootcamp yang dirancang untuk membekali Anda dengan keterampilan
+                praktis, wawasan industri, dan dukungan langsung dari
+                mentor-mentor profesional.
               </div>
             </div>
 
@@ -152,14 +157,13 @@ const HomeSection = ({
                   </defs>
                 </svg>
                 <Link href="/">
-                  <div className="absolute bottom-0 right-0 flex aspect-[4/1] w-[45%] items-center justify-center gap-4 rounded-3xl bg-gray-100 py-4">
-                    <div className="text-sm">Know More</div>
+                  <div className="absolute bottom-0 right-0 flex aspect-[4/1] w-[45%] items-center justify-center gap-4 rounded-3xl bg-primary py-4">
+                    <div className="text-sm">Lebih Banyak</div>
                     <ArrowUpRight className="size-[15px]" />
                   </div>
                 </Link>
               </div>
             </div>
-
 
             <div className="ml-4 flex flex-row items-start gap-8 md:flex-col">
               <div className="flex-[1]">
@@ -172,13 +176,13 @@ const HomeSection = ({
                 <div className="text-4xl font-semibold md:text-5xl">
                   20 <span className="text-primary">+</span>
                 </div>
-                <div className="font-light">Projects Done</div>
+                <div className="font-light">Professional Mentors</div>
               </div>
               <div className="flex-[1]">
                 <div className="text-4xl font-semibold md:text-5xl">
-                  30 <span className="text-primary">+</span>
+                  3K <span className="text-primary">+</span>
                 </div>
-                <div className="font-light">Happy CLients</div>
+                <div className="font-light">Happy Student</div>
               </div>
             </div>
           </div>
@@ -191,10 +195,10 @@ const HomeSection = ({
           {/* Title */}
           <div className="flex w-full flex-col items-center text-2xl md:text-4xl">
             <div className="relative w-fit font-semibold">
-              Creative{" "}
+              Kreatif{" "}
               <span className="absolute -right-12 -top-[17px] size-[40px] rounded-br-full rounded-tl-full rounded-tr-full bg-primary md:-right-16 md:size-[50px]"></span>
             </div>
-            <div className="w-fit">Digital Agency</div>
+            <div className="w-fit">Mentor & Bootcamp</div>
           </div>
 
           {/* Content Tabs */}
@@ -266,6 +270,11 @@ const HomeSection = ({
                           <div></div>
                         )}
                       </div>
+                      {session ? (
+                        <Button className="mt-3">Daftar Sekarang</Button>
+                      ) : (
+                        <Button className="mt-3">Login Terlebih Dahulu</Button>
+                      )}
                     </div>
                   </Link>
                 ))
@@ -329,7 +338,11 @@ const HomeSection = ({
                       </div>
                     </div>
                   </div>
-                  <Button className="mt-3">Booking Sekarang</Button>
+                  {session ? (
+                    <Button className="mt-3">Booking Sekarang</Button>
+                  ) : (
+                    <Button className="mt-3">Login Terlebih Dahulu</Button>
+                  )}
                 </Link>
               ))
             ) : (

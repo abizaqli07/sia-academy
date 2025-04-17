@@ -38,7 +38,7 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
 
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
   .dark {
     --background: 222.2 84% 4.9%;
@@ -73,7 +73,7 @@
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
+    --chart-5: 340 75% 55%;
   }
 }
 @layer base {
@@ -87,21 +87,30 @@
 
 @layer components {
   /* Reuseable Component */
-  .container{
-    @apply w-[90%] max-w-[1200px] mx-auto
+  .container {
+    @apply mx-auto w-[90%] max-w-[1200px];
   }
 
   /* ================ Main Menu Components =================== */
-  .title__comp{
-    @apply w-[100px] md:w-[150px] lg:w-[170px] aspect-[4/2] rounded-full bg-gray-300 shrink-0 relative overflow-hidden
+  .title__comp {
+    @apply relative aspect-[4/2] w-[100px] shrink-0 overflow-hidden rounded-full bg-gray-300 md:w-[150px] lg:w-[170px];
   }
 
-  .footer__box{
-    @apply md:flex-[1] rounded-3xl bg-gray-100 w-full h-full p-6 flex flex-col justify-between gap-y-8
+  .footer__box {
+    @apply flex h-full w-full flex-col justify-between gap-y-8 rounded-3xl bg-gray-100 p-6 md:flex-[1];
   }
 
-  .about__svg{
+  .about__svg {
     background-image: url("/public/images/hero/bg_2.jpg");
+  }
+
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(7.5px);
+    -webkit-backdrop-filter: blur(7.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
   }
 
   /* ================== Swiper Components ==================== */

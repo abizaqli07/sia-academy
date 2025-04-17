@@ -18,7 +18,7 @@ export const navItems: NavItem[] = [
     label: "Dashboard",
   },
   {
-    title: "Mentoring Data",
+    title: "Data Mentoring",
     href: "/dashboard/mentor/mentoring",
     icon: "laptop",
     label: "course",

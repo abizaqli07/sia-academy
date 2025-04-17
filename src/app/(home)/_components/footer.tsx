@@ -65,7 +65,7 @@ const Footer = () => {
 
       <section className="container mx-auto my-8">
         <div className="w-full text-center text-sm font-light text-gray-500">
-          Copyright &#169; 2025 Linkup Digital. All right reserved
+          Copyright &#169; 2025 SIA Academy. All right reserved
         </div>
       </section>
     </div>

@@ -76,19 +76,19 @@ const Navbar = ({ session }: NavbarProps) => {
             href={"/"}
             className={`${pathname === "/" ? "text-primary" : "text-primary-dark"}`}
           >
-            Home
+            Beranda
           </Link>
           <Link
             href={"/about_us"}
             className={`${pathname === "/about_us" ? "text-primary" : "text-primary-dark"}`}
           >
-            About Us
+            Tentang
           </Link>
           <Link
             href={"/join_us"}
             className={`${pathname === "/join_us" ? "text-primary" : "text-primary-dark"}`}
           >
-            Join Us
+            Bergabung
           </Link>
         </div>
 
@@ -136,7 +136,7 @@ const Navbar = ({ session }: NavbarProps) => {
                     href={"/"}
                     className={`text-base font-semibold ${pathname === "/" ? "border-b-2 border-primary text-primary" : "text-primary-dark"}`}
                   >
-                    Home
+                    Beranda
                   </Link>
                 </motion.div>
                 <motion.div
@@ -144,10 +144,10 @@ const Navbar = ({ session }: NavbarProps) => {
                   onClick={() => handleActive(active)}
                 >
                   <Link
-                    href={"/mentoring"}
+                    href={"/about_us"}
                     className={`text-base font-semibold ${pathname === "/about_us" ? "border-b-2 border-primary text-primary" : "text-primary-dark"}`}
                   >
-                    About Us
+                    Tentang
                   </Link>
                 </motion.div>
                 <motion.div
@@ -155,21 +155,10 @@ const Navbar = ({ session }: NavbarProps) => {
                   onClick={() => handleActive(active)}
                 >
                   <Link
-                    href={"/bootcamp"}
-                    className={`text-base font-semibold ${pathname === "/bootcamp" ? "border-b-2 border-primary text-primary" : "text-primary-dark"}`}
-                  >
-                    Bootcamp
-                  </Link>
-                </motion.div>
-                <motion.div
-                  variants={NavLinkAnimate}
-                  onClick={() => handleActive(active)}
-                >
-                  <Link
-                    href={"/webinar"}
+                    href={"/join_us"}
                     className={`text-base font-semibold ${pathname === "/join_us" ? "border-b-2 border-primary text-primary" : "text-primary-dark"}`}
                   >
-                    Join Us
+                    Bergabung
                   </Link>
                 </motion.div>
                 <motion.div

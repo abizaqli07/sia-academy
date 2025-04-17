@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -8,6 +8,8 @@ import { useToast } from "~/hooks/use-toast";
 import { RegisterMentoringSchema } from "~/server/validator/mentoring";
 import { api, type RouterOutputs } from "~/trpc/react";
 
+import { Check, ChevronsUpDown } from "lucide-react";
+import { Editor } from "~/components/editor";
 import { Button } from "~/components/ui/button";
 import {
   Command,
@@ -26,16 +28,15 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "~/lib/utils";
-import { Textarea } from "~/components/ui/textarea";
 import { ScrollArea } from "~/components/ui/scroll-area";
-import { Input } from "~/components/ui/input";
+import { Textarea } from "~/components/ui/textarea";
+import { cn } from "~/lib/utils";
 
 interface RegisterMentoringInterface {
   categories: RouterOutputs["mentorRoute"]["mentoring"]["getCategory"];
@@ -52,6 +53,7 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
           title: "Success",
           description: "Mentoring Register Succesfully",
         });
+        router.refresh()
       },
       onError(error) {
         toast({
@@ -83,9 +85,10 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
     <ScrollArea className="h-full w-full">
       <div className="mx-auto flex h-full max-w-5xl p-6 md:items-center md:justify-center">
         <div>
-          <h1 className="text-2xl">Register Your Mentoring</h1>
+          <h1 className="text-2xl">Daftarkan mentoring anda</h1>
           <p className="text-sm text-slate-600">
-            Register to start your mentoring and get in touch with thausands of mentee
+            Daftarkan mentoringmu segera untuk dapat membuka ruang bagi ribuan
+            mentee yang ingin berkarir.
           </p>
           <Form {...form}>
             <form
@@ -98,16 +101,16 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Mentoring title</FormLabel>
+                    <FormLabel>Judul Mentoring</FormLabel>
                     <FormControl>
                       <Input
                         disabled={isSubmitting}
-                        placeholder="e.g. 'Programming career mentoring'"
+                        placeholder="e.g. 'Mentoring Karir Website Developer'"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      What this mentoring about?
+                      Tentang apa mentoring yang akan anda buat?
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -120,13 +123,9 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
                 name="desc"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Deskripsi</FormLabel>
                     <FormControl>
-                      <Textarea
-                        placeholder="Describe this mentoring in detail"
-                        className="resize-none"
-                        {...field}
-                      />
+                      <Editor {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -142,11 +141,15 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
                     <FormLabel>Materi</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Materi you want to teach your menteee about"
-                        className="resize-none"
+                        placeholder="e.g. Pembuatan CV,Perusahaan Terbaik di Jenjang Karir"
+                        className="resize-y"
                         {...field}
                       />
                     </FormControl>
+                    <FormDescription>
+                      Materi yang ingin anda ajarkan di sesi mentoring anda.
+                      Pisahkan dengan tanda koma (,).
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -158,7 +161,7 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel>Harga</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -167,7 +170,9 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>Price for this mentoring</FormDescription>
+                    <FormDescription>
+                      Harga untuk sesi mentoring anda.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -178,7 +183,7 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
                 name="categoryId"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel>Kategori</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
@@ -203,7 +208,9 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
                         <Command>
                           <CommandInput placeholder="Search category..." />
                           <CommandList>
-                            <CommandEmpty>No categories found.</CommandEmpty>
+                            <CommandEmpty>
+                              Tidak ada kategori yang ditemukan.
+                            </CommandEmpty>
                             <CommandGroup>
                               {categories.map((category) => (
                                 <CommandItem
@@ -230,7 +237,7 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
                       </PopoverContent>
                     </Popover>
                     <FormDescription>
-                      This is the category that will be used in the mentoring.
+                      Kategori untuk mentoring anda
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -243,11 +250,11 @@ const RegisterMentoringForm = ({ categories }: RegisterMentoringInterface) => {
                   type="button"
                   variant="ghost"
                 >
-                  Cancel
+                  Batalkan
                 </Button>
 
                 <Button type="submit" disabled={!isValid || isSubmitting}>
-                  Register
+                  Daftar
                 </Button>
               </div>
             </form>

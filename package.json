@@ -83,7 +83,7 @@
     "tailwindcss-animate": "^1.0.7",
     "tsx": "^4.19.2",
     "uploadthing": "^7.4.4",
-    "xendit-node": "^6.1.0",
+    "xendit-node": "^6.3.0",
     "zod": "^3.23.3",
     "zustand": "^5.0.1"
   },

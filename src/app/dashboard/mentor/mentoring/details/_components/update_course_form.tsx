@@ -4,9 +4,10 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { type z } from "zod";
 import { useToast } from "~/hooks/use-toast";
-import { UpdateCourseSchema } from "~/server/validator/course";
 import { api, type RouterOutputs } from "~/trpc/react";
 
+import { Check, ChevronsUpDown } from "lucide-react";
+import { Editor } from "~/components/editor";
 import { Button } from "~/components/ui/button";
 import {
   Command,
@@ -31,22 +32,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
-import { cn } from "~/lib/utils";
-import { CalendarIcon, Check, ChevronsUpDown } from "lucide-react";
-import { Checkbox } from "~/components/ui/checkbox";
-import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
+import { ScrollArea } from "~/components/ui/scroll-area";
 import { Textarea } from "~/components/ui/textarea";
-import { format } from "date-fns";
-import { Calendar } from "~/components/ui/calendar";
+import { cn } from "~/lib/utils";
 import { UpdateMentoringSchema } from "~/server/validator/mentoring";
-import { Editor } from "~/components/editor";
 
 interface UpdateCourseInterface {
   mentoringData: RouterOutputs["mentorRoute"]["mentoring"]["getData"];
@@ -101,7 +90,7 @@ const UpdateCourseForm = ({
     <ScrollArea className="h-full w-full">
       <div className="mx-auto flex h-full max-w-5xl p-6 md:items-center md:justify-center">
         <div>
-          <h1 className="text-2xl">Update Course</h1>
+          <h1 className="text-2xl">Perbarui Data Mentoring</h1>
           <p className="text-sm text-slate-600">
             Update your couses with fine detail to engage your student :3
           </p>
@@ -116,16 +105,16 @@ const UpdateCourseForm = ({
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Course title</FormLabel>
+                    <FormLabel>Judul Mentoring</FormLabel>
                     <FormControl>
                       <Input
                         disabled={isSubmitting}
-                        placeholder="e.g. 'Advanced web development'"
+                        placeholder="e.g. 'Mentoring Karir Website Developer'"
                         {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      What will you teach in this course?
+                      Tentang apa mentoring yang akan anda buat?
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -138,7 +127,7 @@ const UpdateCourseForm = ({
                 name="desc"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Deskripsi</FormLabel>
                     <FormControl>
                       <Editor {...field} />
                     </FormControl>
@@ -156,11 +145,15 @@ const UpdateCourseForm = ({
                     <FormLabel>Materi</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Materi you want to teach"
-                        className="resize-none"
+                        placeholder="e.g. Pembuatan CV,Perusahaan Terbaik di Jenjang Karir"
+                        className="resize-y"
                         {...field}
                       />
                     </FormControl>
+                    <FormDescription>
+                      Materi yang ingin anda ajarkan di sesi mentoring anda.
+                      Pisahkan dengan tanda koma (,).
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -172,7 +165,7 @@ const UpdateCourseForm = ({
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel>Harga</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -181,7 +174,9 @@ const UpdateCourseForm = ({
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>Price for this course</FormDescription>
+                    <FormDescription>
+                      Harga untuk sesi mentoring anda.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -193,7 +188,7 @@ const UpdateCourseForm = ({
                 name="categoryId"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel>Kategori</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
@@ -218,7 +213,9 @@ const UpdateCourseForm = ({
                         <Command>
                           <CommandInput placeholder="Search category..." />
                           <CommandList>
-                            <CommandEmpty>No categories found.</CommandEmpty>
+                            <CommandEmpty>
+                              Tidak ada kategori yang ditemukan.
+                            </CommandEmpty>
                             <CommandGroup>
                               {categories.map((category) => (
                                 <CommandItem
@@ -245,30 +242,9 @@ const UpdateCourseForm = ({
                       </PopoverContent>
                     </Popover>
                     <FormDescription>
-                      This is the category that will be used in the course.
+                      Kategori untuk mentoring anda
                     </FormDescription>
                     <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="isFeatured"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value!}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel>This is Featured</FormLabel>
-                      <FormDescription>
-                        Check this if you want to see this course on main page
-                      </FormDescription>
-                    </div>
                   </FormItem>
                 )}
               />
@@ -279,11 +255,11 @@ const UpdateCourseForm = ({
                   type="button"
                   variant="ghost"
                 >
-                  Back
+                  Kembali
                 </Button>
 
                 <Button type="submit" disabled={isSubmitting}>
-                  Update
+                  Perbarui
                 </Button>
               </div>
             </form>

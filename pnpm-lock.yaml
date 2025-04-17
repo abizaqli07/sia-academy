@@ -195,8 +195,8 @@ importers:
         specifier: ^7.4.4
         version: 7.4.4(next@15.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.3)
       xendit-node:
-        specifier: ^6.1.0
-        version: 6.1.0
+        specifier: ^6.3.0
+        version: 6.3.0
       zod:
         specifier: ^3.23.3
         version: 3.23.3
@@ -4307,8 +4307,8 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
-  xendit-node@6.1.0:
-    resolution: {integrity: sha512-CRnE/avQKkEcocjBwjGdKHDBz/wKTpwzzaGv+qvrzSxrjBUQbs66Ajxo6RoluCMJs//Rw1faQU/6y900El5xIg==}
+  xendit-node@6.3.0:
+    resolution: {integrity: sha512-1L2aoUu9kW7zG5QnwCfTfTqj5snX2biW5XmtwstgnpUQveoUZgL67dTDoFui5IryWYDVzKsMq1jASFHcd+J6CQ==}
     engines: {node: '>=18.0.0'}
 
   yallist@4.0.0:
@@ -8337,7 +8337,7 @@ snapshots:
 
   wrappy@1.0.2: {}
 
-  xendit-node@6.1.0: {}
+  xendit-node@6.3.0: {}
 
   yallist@4.0.0: {}
 

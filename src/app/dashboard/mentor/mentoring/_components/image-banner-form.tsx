@@ -61,17 +61,17 @@ export const ImageBannerForm = ({
       <div className="flex items-center justify-between font-medium">
         Mentoring banner
         <Button onClick={toggleEdit} variant="ghost">
-          {isEditing && <>Cancel</>}
+          {isEditing && <>Batalkan</>}
           {!isEditing && !initialData && (
             <>
               <PlusCircle className="mr-2 h-4 w-4" />
-              Add an image
+              Tambah
             </>
           )}
           {!isEditing && initialData && (
             <>
               <Pencil className="mr-2 h-4 w-4" />
-              Edit image
+              Edit gambar
             </>
           )}
         </Button>

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import MyCourseCard from "./my_course_card";
 import { type RouterOutputs } from "~/trpc/react";
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
 
 const tabs = [
   {
@@ -47,26 +49,32 @@ const MyCourseList = ({ data }: MyCourseListPropsInterface) => {
       <div className="w-full">
         {tab === "webinar" &&
           (dataWebinar.length > 0 ? (
-            <div className="flex w-full flex-col gap-y-6">
+            <div className="flex w-full flex-wrap gap-6">
               {dataWebinar.map((value) => (
                 <MyCourseCard key={value.id} data={value} />
               ))}
             </div>
           ) : (
-            <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 px-24 py-4 text-center">
+            <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 px-24 py-4 text-center gap-y-3 flex-col">
               <div className="text-2xl font-semibold">Belum Ada Webinar</div>
+              <Link href={"/dashboard/user/course"}>
+                <Button>Temukan Webinar</Button>
+              </Link>
             </div>
           ))}
         {tab === "bootcamp" &&
           (dataBootcamp.length > 0 ? (
-            <div className="flex w-full flex-col gap-y-6">
+            <div className="flex w-full flex-wrap gap-6">
               {dataBootcamp.map((value) => (
                 <MyCourseCard key={value.id} data={value} />
               ))}
             </div>
           ) : (
-            <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 px-24 py-4 text-center">
+            <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 px-24 py-4 text-center gap-y-3 flex-col">
               <div className="text-2xl font-semibold">Belum Ada Bootcamp</div>
+              <Link href={"/dashboard/user/course"}>
+                <Button>Temukan Bootcamp</Button>
+              </Link>
             </div>
           ))}
       </div>

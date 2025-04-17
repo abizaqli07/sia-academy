@@ -38,14 +38,14 @@ const authDefaultConfig: NextAuthConfig = {
             throw new Error("You're not configured password yet");
           }
 
-          if (!credentials) {
-            throw new Error("Something went wrong");
-          }
-
           const passwordMatch = await compare(password, user.password);
 
           if (!passwordMatch) {
             throw new Error(" Email and password doest match");
+          }
+
+          if (!credentials) {
+            throw new Error("Something went wrong");
           }
 
           const userData: User = {

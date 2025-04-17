@@ -393,7 +393,7 @@ export const mentoring = createTable("mentoring", {
   bannerImage: varchar("bannerImage", { length: 255 }),
   price: numeric("price", { precision: 15, scale: 0 }).notNull(),
   isFeatured: boolean("isFeatured").default(false),
-  isHidden: boolean("isHidden").default(false),
+  isHidden: boolean("isHidden").default(true),
   status: requestStatus("status").default("PENDING"),
   mentorId: varchar("mentorId")
     .notNull()

@@ -74,7 +74,7 @@ const Register = () => {
     <div className="flex min-h-screen w-full">
       <div className="relative hidden flex-1 bg-primary md:flex">
         <Image
-          src={"/images/auth/auth_bg.png"}
+          src={"/images/auth/auth_bg_2.jpg"}
           alt="Background"
           fill
           className="object-cover"
@@ -92,7 +92,7 @@ const Register = () => {
             /> */}
             <div className="text-center text-3xl font-bold">SIA Academy</div>
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Create your account
+              Buat akun anda
             </h2>
           </div>
 
@@ -108,9 +108,9 @@ const Register = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Fullname</FormLabel>
+                        <FormLabel>Nama Lengkap</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your name" {...field} />
+                          <Input placeholder="Nama anda" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -124,10 +124,10 @@ const Register = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email address</FormLabel>
+                        <FormLabel>Alamat Email</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Your email"
+                            placeholder="Email anda"
                             autoComplete="email"
                             {...field}
                           />
@@ -165,11 +165,11 @@ const Register = () => {
                     name="confirmPassword"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Confirm Password</FormLabel>
+                        <FormLabel>Konfirmasi Password</FormLabel>
                         <FormControl>
                           <Input
                             type="password"
-                            placeholder="Password"
+                            placeholder="Konfirmasi password"
                             autoComplete="current-password"
                             {...field}
                           />
@@ -192,7 +192,7 @@ const Register = () => {
             </Form>
 
             <p className="mt-10 text-center text-sm text-gray-500">
-              Already have account?{" "}
+              Sudah memiliki akun?{" "}
               <Link
                 href={`/auth/signin${search !== null ? "?redirect=" + search : ""}`}
                 className="font-semibold leading-6 text-primary hover:text-primary/80"

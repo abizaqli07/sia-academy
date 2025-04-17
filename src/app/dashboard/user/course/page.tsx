@@ -1,9 +1,8 @@
 import BannerSliderSection from "~/components/section/banner_slider";
 import { api } from "~/trpc/server";
 import CourseSection from "./_components/course";
-import SearchCourse from "./_components/search_course";
 
-export const revalidate = 0;
+export const dynamic = 'force-dynamic'
 
 const bannerData = [
   {
@@ -28,7 +27,7 @@ const CoursePage = async () => {
       <BannerSliderSection bannerData={bannerData} />
 
       {/* Search Section */}
-      <SearchCourse />
+      {/* <SearchCourse /> */}
 
       {/* Mentor Section */}
       <CourseSection courses={courses} />

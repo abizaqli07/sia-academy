@@ -59,7 +59,7 @@ const Login = () => {
     <div className="flex min-h-screen w-full">
       <div className="relative hidden flex-1 bg-primary md:flex">
         <Image
-          src={"/images/auth/auth_bg.png"}
+          src={"/images/auth/auth_bg_2.jpg"}
           alt="Background"
           fill
           className="object-cover"
@@ -78,7 +78,7 @@ const Login = () => {
             /> */}
             <div className="text-center text-3xl font-bold">SIA Academy</div>
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Sign in to your account
+              Masuk ke akun anda
             </h2>
           </div>
 
@@ -94,10 +94,10 @@ const Login = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email address</FormLabel>
+                        <FormLabel>Alamat Email</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Your email"
+                            placeholder="Email anda"
                             autoComplete="email"
                             {...field}
                           />
@@ -131,7 +131,7 @@ const Login = () => {
                     href={"/auth/forgot_password"}
                     className="mt-1 text-sm text-gray-700"
                   >
-                    Forgot password?
+                    Lupa password?
                   </Link>
                 </div>
 
@@ -147,12 +147,12 @@ const Login = () => {
             </Form>
 
             <p className="mt-10 text-center text-sm text-gray-500">
-              Not registered yet?{" "}
+              Belum terdaftar?{" "}
               <Link
                 href={`/auth/signup${search !== null ? "?redirect=" + search : ""}`}
                 className="font-semibold leading-6 text-primary hover:text-primary"
               >
-                Start your learning journey
+                Mulai perjalanan karirmu
               </Link>
             </p>
           </div>

@@ -41,7 +41,7 @@ const CourseDetailSection = ({ data }: CourseDetailPropsInterface) => {
             {data?.isFree && (
               <div className="w-full space-y-4">
                 <div className="text-lg font-bold">
-                  PENGETAHUAN INDUSTRI EKSKLUSIF, GRATIS!
+                  PENGETAHUAN INDUSTRI EKSKLUSIF {data.isFree ? ", GRATIS!" : ""}
                 </div>
                 <div className="text-5xl font-bold text-primary">
                   {data.title}

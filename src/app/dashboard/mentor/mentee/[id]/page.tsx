@@ -5,6 +5,9 @@ import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { FileUser } from "lucide-react";
 
+export const dynamicParams = true;
+export const dynamic = 'force-dynamic'
+
 const MenteeDetailPage = async ({
   params,
 }: {

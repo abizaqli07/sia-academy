@@ -10,6 +10,7 @@ import { type z } from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -81,7 +82,7 @@ const Register = () => {
     <div className="flex min-h-screen w-full">
       <div className="relative hidden flex-1 bg-primary md:flex">
         <Image
-          src={"/images/auth/auth_bg.png"}
+          src={"/images/auth/auth_bg_2.jpg"}
           alt="Background"
           fill
           className="object-cover"
@@ -99,7 +100,7 @@ const Register = () => {
             /> */}
             <div className="text-center text-3xl font-bold">SIA Academy</div>
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Create your account
+              Bergabung menjadi mentor
             </h2>
           </div>
 
@@ -115,9 +116,9 @@ const Register = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Fullname</FormLabel>
+                        <FormLabel>Nama Lengkap</FormLabel>
                         <FormControl>
-                          <Input placeholder="Your name" {...field} />
+                          <Input placeholder="Nama anda" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -131,10 +132,10 @@ const Register = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email address</FormLabel>
+                        <FormLabel>Alamat Email</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="Your email"
+                            placeholder="Email anda"
                             autoComplete="email"
                             {...field}
                           />
@@ -172,11 +173,11 @@ const Register = () => {
                     name="confirmPassword"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Confirm Password</FormLabel>
+                        <FormLabel>Konfirmasi Password</FormLabel>
                         <FormControl>
                           <Input
                             type="password"
-                            placeholder="Password"
+                            placeholder="Konfirmasi password"
                             autoComplete="current-password"
                             {...field}
                           />
@@ -187,7 +188,7 @@ const Register = () => {
                   />
                 </div>
 
-                <Separator className="h-1" />
+                <Separator className="h-0.5" />
 
                 <div>
                   <FormField
@@ -195,11 +196,11 @@ const Register = () => {
                     name="industry"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Category Industry</FormLabel>
+                        <FormLabel>Kategori Industri</FormLabel>
                         <FormControl>
                           <Input
                             type="text"
-                            placeholder="e.g. Information Technology"
+                            placeholder="e.g. Teknologi"
                             {...field}
                           />
                         </FormControl>
@@ -214,14 +215,18 @@ const Register = () => {
                     name="expertise"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Expertise</FormLabel>
+                        <FormLabel>Keahlian</FormLabel>
                         <FormControl>
                           <Input
                             type="text"
-                            placeholder="Expertise"
+                            placeholder="e.g. Software Developer,Cloud Engineer"
                             {...field}
                           />
                         </FormControl>
+                        <FormDescription>
+                          Bisa diisi lebih dari satu, gunakan tanda koma (,)
+                          untuk memisahkan.
+                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -233,11 +238,11 @@ const Register = () => {
                     name="title"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Work Title</FormLabel>
+                        <FormLabel>Gelar Pekerjaan</FormLabel>
                         <FormControl>
                           <Input
                             type="text"
-                            placeholder="Work Title"
+                            placeholder="e.g. Senior Web Developer"
                             {...field}
                           />
                         </FormControl>
@@ -252,9 +257,13 @@ const Register = () => {
                     name="company"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Company (optional)</FormLabel>
+                        <FormLabel>Perusahaan (optional)</FormLabel>
                         <FormControl>
-                          <Input type="text" placeholder="Company" {...field} />
+                          <Input
+                            type="text"
+                            placeholder="Perusahaan bekerja"
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -268,11 +277,11 @@ const Register = () => {
                     name="desc"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Description</FormLabel>
+                        <FormLabel>Deskripsi</FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder="Tell us a little bit about yourself"
-                            className="resize-none"
+                            placeholder="Ceritakan sedikit tentang anda kepada kami"
+                            className="resize-y"
                             {...field}
                           />
                         </FormControl>
