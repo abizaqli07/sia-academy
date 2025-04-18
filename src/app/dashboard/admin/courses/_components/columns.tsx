@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { type ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react"
+import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "~/components/ui/button";
@@ -9,14 +9,16 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { Badge } from "~/components/ui/badge";
 import { cn, currencyFormatter } from "~/lib/utils";
 import { type RouterOutputs } from "~/trpc/react";
 import { type category as CategoryCourse } from "~/server/db/schema";
 
-export const columns: ColumnDef<RouterOutputs["adminRoute"]["course"]["getAllCourse"][number]>[] = [
+export const columns: ColumnDef<
+  RouterOutputs["adminRoute"]["course"]["getAllCourse"][number]
+>[] = [
   {
     accessorKey: "title",
     header: ({ column }) => {
@@ -28,7 +30,7 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["course"]["getAllCou
           Title
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -42,16 +44,14 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["course"]["getAllCou
           Category
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      type categoryType = typeof CategoryCourse.$inferSelect
-      const category: categoryType = row.getValue("category")
+      type categoryType = typeof CategoryCourse.$inferSelect;
+      const category: categoryType = row.getValue("category");
 
-      return (
-        <div>{category?.name??"Category"}</div>
-      )
-    }
+      return <div>{category?.name ?? "Category"}</div>;
+    },
   },
   {
     accessorKey: "isHidden",
@@ -61,23 +61,20 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["course"]["getAllCou
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Title
+          Publicity
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
       const isHidden = row.getValue("isHidden") || false;
 
       return (
-        <Badge className={cn(
-          "bg-slate-500",
-          isHidden && "bg-primary"
-        )}>
+        <Badge className={cn("bg-primary", isHidden && "bg-slate-500")}>
           {isHidden ? "Draft" : "Published"}
         </Badge>
-      )
-    }
+      );
+    },
   },
   {
     accessorKey: "isWebinar",
@@ -90,20 +87,17 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["course"]["getAllCou
           Type
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
       const isWebinar = row.getValue("isWebinar") || false;
 
       return (
-        <Badge className={cn(
-          "bg-slate-500",
-          isWebinar && "bg-primary"
-        )}>
+        <Badge className={cn("bg-secondary", isWebinar && "bg-primary")}>
           {isWebinar ? "Webinar" : "Bootcamp"}
         </Badge>
-      )
-    }
+      );
+    },
   },
   {
     accessorKey: "price",
@@ -116,15 +110,15 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["course"]["getAllCou
           Price
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      const formattedPrice = currencyFormatter.format(Number(row.getValue("price"))) 
+      const formattedPrice = currencyFormatter.format(
+        Number(row.getValue("price")),
+      );
 
-      return (
-        <div>{formattedPrice}</div>
-      )
-    }
+      return <div>{formattedPrice}</div>;
+    },
   },
   {
     id: "actions",
@@ -142,13 +136,13 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["course"]["getAllCou
           <DropdownMenuContent align="end">
             <Link href={`/dashboard/admin/courses/${id}`}>
               <DropdownMenuItem>
-                <Pencil className="h-4 w-4 mr-2" />
+                <Pencil className="mr-2 h-4 w-4" />
                 Edit
               </DropdownMenuItem>
             </Link>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
-    }
-  }
-]
+      );
+    },
+  },
+];

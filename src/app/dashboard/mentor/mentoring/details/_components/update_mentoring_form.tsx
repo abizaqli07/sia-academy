@@ -6,7 +6,7 @@ import { type z } from "zod";
 import { useToast } from "~/hooks/use-toast";
 import { api, type RouterOutputs } from "~/trpc/react";
 
-import { Check, ChevronsUpDown } from "lucide-react";
+import { ArrowLeft, Check, ChevronsUpDown } from "lucide-react";
 import { Editor } from "~/components/editor";
 import { Button } from "~/components/ui/button";
 import {
@@ -42,7 +42,7 @@ interface UpdateCourseInterface {
   categories: RouterOutputs["adminRoute"]["course"]["getCategory"];
 }
 
-const UpdateCourseForm = ({
+const UpdateMentoringForm = ({
   mentoringData,
   categories,
 }: UpdateCourseInterface) => {
@@ -90,9 +90,18 @@ const UpdateCourseForm = ({
     <ScrollArea className="h-full w-full">
       <div className="mx-auto flex h-full max-w-5xl p-6 md:items-center md:justify-center">
         <div>
-          <h1 className="text-2xl">Perbarui Data Mentoring</h1>
+          <div className="w-full">
+            <div
+              onClick={() => router.back()}
+              className="mb-8 flex cursor-pointer items-center text-sm transition hover:opacity-75"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Kembali ke setup mentoring
+            </div>
+          </div>
+          <h1 className="text-2xl font-medium">Perbarui Data Mentoring</h1>
           <p className="text-sm text-slate-600">
-            Update your couses with fine detail to engage your student :3
+            Perbarui data mentoring anda agar lebih menarik mentee :3
           </p>
           <Form {...form}>
             <form
@@ -270,4 +279,4 @@ const UpdateCourseForm = ({
   );
 };
 
-export default UpdateCourseForm;
+export default UpdateMentoringForm;

@@ -39,12 +39,13 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { cn } from "~/lib/utils";
-import { CalendarIcon, Check, ChevronsUpDown } from "lucide-react";
+import { ArrowLeft, CalendarIcon, Check, ChevronsUpDown } from "lucide-react";
 import { Checkbox } from "~/components/ui/checkbox";
 import { ScrollArea, ScrollBar } from "~/components/ui/scroll-area";
 import { Textarea } from "~/components/ui/textarea";
 import { format } from "date-fns";
 import { Calendar } from "~/components/ui/calendar";
+import Link from "next/link";
 
 interface UpdateCourseInterface {
   initialData: RouterOutputs["adminRoute"]["course"]["getOne"];
@@ -57,13 +58,15 @@ const UpdateCourseForm = ({
 }: UpdateCourseInterface) => {
   const router = useRouter();
   const { toast } = useToast();
+  const context = api.useUtils()
 
   const course = api.adminRoute.course.update.useMutation({
-    onSuccess(data) {
+    async onSuccess() {
       toast({
         title: "Success",
         description: "Course successfully updated",
       });
+      await context.adminRoute.course.getOne.invalidate()
     },
     onError(error) {
       toast({
@@ -134,9 +137,18 @@ const UpdateCourseForm = ({
 
   return (
     <ScrollArea className="h-full w-full">
-      <div className="mx-auto flex h-full max-w-5xl p-6 md:items-center md:justify-center">
+      <div className="mx-auto flex h-full max-w-5xl flex-col p-6 md:items-center md:justify-center">
         <div>
-          <h1 className="text-2xl">Update Course</h1>
+          <div className="w-full">
+            <div
+              onClick={() => router.back()}
+              className="mb-8 cursor-pointer flex items-center text-sm transition hover:opacity-75"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to course setup
+            </div>
+          </div>
+          <h1 className="text-2xl font-medium">Update Course</h1>
           <p className="text-sm text-slate-600">
             Update your couses with fine detail to engage your student :3
           </p>
@@ -176,11 +188,14 @@ const UpdateCourseForm = ({
                     <FormLabel>Title Description</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Describe what this course about briefly"
+                        placeholder="e.g. Let's learning together"
                         className="resize-none"
                         {...field}
                       />
                     </FormControl>
+                    <FormDescription>
+                      Title for your description
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -196,7 +211,7 @@ const UpdateCourseForm = ({
                     <FormControl>
                       <Textarea
                         placeholder="Describe this course in detail"
-                        className="resize-none"
+                        className="resize-y"
                         {...field}
                       />
                     </FormControl>

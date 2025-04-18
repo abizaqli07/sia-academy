@@ -1,14 +1,14 @@
 "use client";
 
-import { ArrowLeft, LayoutDashboard, Video } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Loader2, Video } from "lucide-react";
 import Link from "next/link";
-import { redirect, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Banner } from "~/components/ui/banner";
 import { IconBadge } from "~/components/ui/icon-badge";
 import { api } from "~/trpc/react";
 import { ChapterActions } from "./_components/chapter-actions";
-import { ChapterTitleForm } from "./_components/chapter-title-form";
 import { ChapterDescriptionForm } from "./_components/chapter-description-form";
+import { ChapterTitleForm } from "./_components/chapter-title-form";
 import { ChapterVideoForm } from "./_components/chapter-video-form";
 
 const ChapterIdPage = () => {
@@ -19,11 +19,22 @@ const ChapterIdPage = () => {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="relative h-full w-full">
+        <div className="rounded-m absolute right-0 top-0 flex h-full w-full flex-col items-center justify-center gap-4 bg-slate-500/20">
+          <div className="text-2xl font-semibold">Loading</div>
+          <Loader2 className="h-12 w-12 animate-spin text-primary" />
+        </div>
+      </div>
+    );
   }
 
   if (!chapter) {
-    return redirect("/");
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        Something Wrong Occured
+      </div>
+    );
   }
 
   const requiredFields = [chapter.title, chapter.description, chapter.videoUrl];
@@ -35,7 +46,7 @@ const ChapterIdPage = () => {
 
   const isComplete = requiredFields.every(Boolean);
 
-  console.log(params)
+  console.log(params);
 
   return (
     <>

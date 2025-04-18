@@ -5,6 +5,7 @@ import { type CreateInvoiceRequest } from "xendit-node/invoice/models";
 import { getBaseProductionUrl } from "~/lib/get-base-url";
 import { purchase, userMentoringData } from "~/server/db/schema";
 import { RegisterUserDataMentoringSchema } from "~/server/validator/mentoring";
+import { GetInvoiceDataSchema } from "~/server/validator/purchase";
 
 export const purchaseRouter = createTRPCRouter({
   purchaseCourse: protectedProcedure
@@ -222,6 +223,23 @@ export const purchaseRouter = createTRPCRouter({
           url: null,
           error: error,
         };
+      }
+    }),
+    getInvoiceData: protectedProcedure
+    .input(GetInvoiceDataSchema)
+    .query(async ({ ctx, input }) => {
+      const invoice = await ctx.db.query.purchase.findFirst({
+        where: (purchase, { eq }) => eq(purchase.invoiceId, input.invoiceId),
+      });
+
+      if (invoice?.status === "FREE") {
+        return null;
+      } else {
+        const invoiceData = await ctx.xnd.Invoice.getInvoiceById({
+          invoiceId: input.invoiceId ?? "",
+        });
+
+        return invoiceData;
       }
     }),
 });

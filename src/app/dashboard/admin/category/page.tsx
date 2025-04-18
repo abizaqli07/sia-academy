@@ -1,16 +1,15 @@
 "use client";
 
-import { api } from "~/trpc/react";
-import UpdateMentoringForm from "./_components/update_mentoring_form";
 import { Loader2 } from "lucide-react";
+import { api } from "~/trpc/react";
+import { DataTable } from "./_components/data-table";
+import { columns } from "./_components/columns";
 
-const CreatePage = () => {
-  const { data, isLoading } = api.mentorRoute.mentoring.getData.useQuery();
+const CategoryList = () => {
+  const { data, isLoading, isError } =
+    api.adminRoute.category.getAll.useQuery();
 
-  const { data: categories, isLoading: categoryLoading } =
-    api.adminRoute.course.getCategory.useQuery();
-
-  if (isLoading || categoryLoading) {
+  if (isLoading) {
     return (
       <div className="relative h-full w-full">
         <div className="rounded-m absolute right-0 top-0 flex h-full w-full flex-col items-center justify-center gap-4 bg-slate-500/20">
@@ -21,7 +20,7 @@ const CreatePage = () => {
     );
   }
 
-  if (!data || !categories) {
+  if (isError || data === undefined) {
     return (
       <div className="flex h-full w-full items-center justify-center">
         Something Wrong Occured
@@ -30,10 +29,10 @@ const CreatePage = () => {
   }
 
   return (
-    <>
-      <UpdateMentoringForm mentoringData={data} categories={categories} />
-    </>
+    <div className="p-6">
+      <DataTable columns={columns} data={data} />
+    </div>
   );
 };
 
-export default CreatePage;
+export default CategoryList;

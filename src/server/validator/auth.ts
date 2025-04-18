@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-// const phoneRegex = new RegExp(
-//   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/,
-// );
+const phoneRegex = new RegExp(
+  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/,
+);
 
 export const LoginSchema = z.object({
   email: z.string().email({
@@ -74,6 +74,9 @@ export const UpdateDataSchema = z
     name: z.string().min(1, {
       message: "Username required",
     }),
+    phone: z.string().regex(phoneRegex, "Invalid Number!"),
+    notifConsent: z.boolean().default(false),
+    image: z.string().url().nullable()
   })
 
 export const ForgotPasswordSchema = z.object({

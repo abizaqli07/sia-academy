@@ -1,10 +1,10 @@
 "use client";
 
-import { api } from "~/trpc/react";
-import UpdateMentoringForm from "./_components/update_mentoring_form";
 import { Loader2 } from "lucide-react";
+import { api } from "~/trpc/react";
+import UpdateMentorForm from "./_components/update_mentor_form";
 
-const CreatePage = () => {
+const DetailMentorPage = () => {
   const { data, isLoading } = api.mentorRoute.mentoring.getData.useQuery();
 
   const { data: categories, isLoading: categoryLoading } =
@@ -31,9 +31,9 @@ const CreatePage = () => {
 
   return (
     <>
-      <UpdateMentoringForm mentoringData={data} categories={categories} />
+      <UpdateMentorForm mentoringData={data} />
     </>
   );
 };
 
-export default CreatePage;
+export default DetailMentorPage;

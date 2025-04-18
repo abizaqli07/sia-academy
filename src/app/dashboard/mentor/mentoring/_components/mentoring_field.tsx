@@ -8,10 +8,13 @@ import { type RouterOutputs } from "~/trpc/react";
 import { Actions } from "./actions";
 import { ImageBannerForm } from "./image-banner-form";
 import RegisterMentoringForm from "./register_mentoring_form";
+import { ImageForm } from "./image-form";
 
 interface MentoringFieldInterface {
   mentorData: RouterOutputs["mentorRoute"]["mentoring"]["getData"];
-  categories: RouterOutputs["mentorRoute"]["mentoring"]["getCategory"] | undefined;
+  categories:
+    | RouterOutputs["mentorRoute"]["mentoring"]["getCategory"]
+    | undefined;
 }
 
 const MentoringField = ({
@@ -82,6 +85,19 @@ const MentoringField = ({
                   </Link>
                 </div>
               </div>
+
+              {/* Edit Details Mentor */}
+              <div className="mt-6 rounded-md border bg-slate-100 p-4">
+                <div className="flex items-center justify-between font-medium">
+                  Detail Mentor
+                  <Link href={`/dashboard/mentor/mentoring/details_mentor`}>
+                    <Button variant="ghost">
+                      <Pencil className="mr-2 h-4 w-4" />
+                      Edit detail
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
 
             <div className="space-y-6">
@@ -90,10 +106,16 @@ const MentoringField = ({
                   <IconBadge icon={ImageIcon} />
                   <h2 className="text-xl">Gambar mentor & banner</h2>
                 </div>
-                {/* Course Banner Image */}
+                {/* Mentoring Banner Image */}
                 <ImageBannerForm
                   initialData={mentoringData.bannerImage}
                   mentoringId={mentoringData.id}
+                />
+
+                {/* Mentor Image */}
+                <ImageForm
+                  initialData={mentorData.image}
+                  mentorId={mentorData.id}
                 />
               </div>
             </div>

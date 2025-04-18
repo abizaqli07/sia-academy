@@ -1,4 +1,5 @@
 import { createTRPCRouter } from "../trpc";
+import { categoryAdminRouter } from "./admin/category";
 import { chapterAdminRouter } from "./admin/chapter";
 import { courseAdminRouter } from "./admin/course";
 import { mentorAdminRouter } from "./admin/mentor";
@@ -6,5 +7,6 @@ import { mentorAdminRouter } from "./admin/mentor";
 export const adminRouter = createTRPCRouter({
   course: courseAdminRouter,
   chapter: chapterAdminRouter,
-  mentor: mentorAdminRouter
+  mentor: mentorAdminRouter,
+  category: categoryAdminRouter
 });

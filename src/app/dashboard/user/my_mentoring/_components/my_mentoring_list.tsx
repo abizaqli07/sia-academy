@@ -14,7 +14,7 @@ const MyMentoringList = ({ data }: MyMentoringListPropsInterface) => {
     <div className="w-full space-y-8">
       <div className="w-full">
         {data.length > 0 ? (
-          <div className="flex w-full flex-wrap gap-y-6">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-y-6">
             {data.map((value) => (
               <MyMentoringCard key={value.id} data={value} />
             ))}

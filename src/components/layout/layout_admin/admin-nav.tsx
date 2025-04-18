@@ -1,19 +1,19 @@
 "use client";
+import { type Session } from "next-auth";
+import { signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
-import { signOut } from "next-auth/react";
 
-export function AdminNav() {
+export function AdminNav({ session }: { session: Session | null }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -27,28 +27,14 @@ export function AdminNav() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">Admin</p>
+            <p className="text-sm font-medium leading-none">
+              {session?.user.name ?? "Mentor"}
+            </p>
             <p className="text-xs leading-none text-muted-foreground">
-              admin@gmail.com
+              {session?.user.email ?? "Mentor@mentor.com"}
             </p>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            Profile
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Billing
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Settings
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
-        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() =>

@@ -6,12 +6,13 @@ import { useRouter } from "next/navigation";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdBook } from "react-icons/io";
 import { MdOutlineDateRange } from "react-icons/md";
+import UserDashboardSkeleton from "~/components/dashboard_skeleton";
 import { Badge } from "~/components/ui/badge";
 
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 
-import { type RouterOutputs } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
 
 interface MyCourseCardPropsInterface {
   data: RouterOutputs["userRoute"]["course"]["getAllMyCourse"][number];
@@ -20,9 +21,37 @@ interface MyCourseCardPropsInterface {
 const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
   const router = useRouter();
 
+  const {
+    data: invoiceData,
+    isLoading,
+    isError,
+  } = api.userRoute.purchase.getInvoiceData.useQuery({
+    invoiceId: data.invoiceId ?? "",
+  });
+
+  let status = "";
+
+  if (invoiceData?.status === undefined) {
+    status = "Loading";
+  } else if (invoiceData?.status === "PAID") {
+    status = "Payment Completed";
+  }
+
+  if (isLoading) {
+    return <UserDashboardSkeleton />;
+  }
+
+  if (isError) {
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        Something Wrong Occured
+      </div>
+    );
+  }
+
   return (
-    <div className="relative flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 md:flex-row max-w-[500px]">
-      <div className="left-0 top-0 rounded-lg bg-primary px-4 py-2 font-semibold text-white md:absolute md:rounded-bl-none md:rounded-tr-none z-30">
+    <div className="relative flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 md:flex-row">
+      <div className="left-0 top-0 z-30 rounded-lg bg-primary px-4 py-2 font-semibold text-white md:absolute md:rounded-bl-none md:rounded-tr-none">
         {data.course?.isWebinar ? "Webinar" : "Bootcamp"}
       </div>
 
@@ -66,7 +95,11 @@ const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
             ""
           )}
           {data.course?.isWebinar === false && (
-            <Button onClick={ ()=> router.push(`/dashboard/user/my_course/${data.courseId}`)}>
+            <Button
+              onClick={() =>
+                router.push(`/dashboard/user/my_course/${data.courseId}`)
+              }
+            >
               Start Learning
             </Button>
           )}
@@ -76,10 +109,10 @@ const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
           <div className="font-medium">Status</div>
           {data?.status === "FREE" ? (
             <Badge>Free</Badge>
-          ) : data?.status === "PURCHASED" ? (
-            <Badge>Payment Complete</Badge>
-          ) : data?.status === "PENDING" ? (
-            <Badge>Pending</Badge>
+          ) : invoiceData?.status === "PAID" ? (
+            <Badge>{status}</Badge>
+          ) : invoiceData?.status === "EXPIRED" ? (
+            <Badge variant={"destructive"}>Expired</Badge>
           ) : (
             <Link href={data?.invoiceUrl ?? ""}>
               <Button>Payout</Button>

@@ -28,7 +28,7 @@ interface CourseSaleProps {
     isSale: boolean;
     salePrice: string;
   };
-  chapterId: string;
+  courseId: string;
 }
 
 const formSchema = z.object({
@@ -36,10 +36,7 @@ const formSchema = z.object({
   salePrice: z.string(),
 });
 
-export const CourseSale = ({
-  initialData,
-  chapterId,
-}: CourseSaleProps) => {
+export const CourseSale = ({ initialData, courseId }: CourseSaleProps) => {
   const { toast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -54,7 +51,7 @@ export const CourseSale = ({
         description: "Course updated",
       });
       toggleEdit();
-      await context.adminRoute.chapter.invalidate();
+      await context.adminRoute.course.getOne.invalidate();
     },
     onError(error) {
       toast({
@@ -75,7 +72,7 @@ export const CourseSale = ({
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     chapter.mutate({
       ...values,
-      id: chapterId,
+      id: courseId,
     });
   };
 
@@ -89,22 +86,29 @@ export const CourseSale = ({
           ) : (
             <>
               <Pencil className="mr-2 h-4 w-4" />
-              Edit sale price
+              Edit discount
             </>
           )}
         </Button>
       </div>
       {!isEditing && (
-        <p className="text-sm font-semibold mt-4">
-          {initialData.isSale
-            ? `Sale Price : ${currencyFormatter.format(Number(initialData.salePrice))}`
-            : "Not on Sale"}
-        </p>
+        <div
+          className={`mt-4 w-full rounded-sm p-2 text-center ${initialData.isSale ? "bg-slate-200 " : "border border-slate-300 font-semibold"}`}
+        >
+          <p className="text-base">
+            {initialData.isSale
+              ? `Sale Price : ${currencyFormatter.format(Number(initialData.salePrice))}`
+              : "Not on Sale"}
+          </p>
+        </div>
       )}
-      {( isEditing && ((initialData.price === null) || (initialData.price === "0"))) && (
-        <div className="font-semibold text-red-500">Price Has not been Set</div>
-      )}
-      {(isEditing && ((initialData.price !== null) && (initialData.price !== "0"))) && (
+      {isEditing &&
+        (initialData.price === null || initialData.price === "0") && (
+          <div className="font-semibold text-red-500">
+            Price Has not been Set
+          </div>
+        )}
+      {isEditing && initialData.price !== null && initialData.price !== "0" && (
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -135,13 +139,13 @@ export const CourseSale = ({
               )}
             />
             <FormField
-              disabled={!form.getValues("isSale")}
               control={form.control}
               name="salePrice"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
                     <Input
+                      className={form.getValues("isSale") ? "" : "hidden"}
                       type="number"
                       min={0}
                       disabled={isSubmitting}

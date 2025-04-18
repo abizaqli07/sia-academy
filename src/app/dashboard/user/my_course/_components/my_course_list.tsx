@@ -49,7 +49,7 @@ const MyCourseList = ({ data }: MyCourseListPropsInterface) => {
       <div className="w-full">
         {tab === "webinar" &&
           (dataWebinar.length > 0 ? (
-            <div className="flex w-full flex-wrap gap-6">
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
               {dataWebinar.map((value) => (
                 <MyCourseCard key={value.id} data={value} />
               ))}
@@ -64,7 +64,7 @@ const MyCourseList = ({ data }: MyCourseListPropsInterface) => {
           ))}
         {tab === "bootcamp" &&
           (dataBootcamp.length > 0 ? (
-            <div className="flex w-full flex-wrap gap-6">
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
               {dataBootcamp.map((value) => (
                 <MyCourseCard key={value.id} data={value} />
               ))}

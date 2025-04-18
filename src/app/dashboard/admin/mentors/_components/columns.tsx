@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { type ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
@@ -10,14 +10,18 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { type RouterOutputs } from "~/trpc/react";
 
-type MentorCourse = RouterOutputs["adminRoute"]["mentor"]["getAll"][number]["courses"]
-type MentorMentoring = RouterOutputs["adminRoute"]["mentor"]["getAll"][number]["mentoring"]
+type MentorCourse =
+  RouterOutputs["adminRoute"]["mentor"]["getAll"][number]["courses"];
+type MentorMentoring =
+  RouterOutputs["adminRoute"]["mentor"]["getAll"][number]["mentoring"];
 
-export const columns: ColumnDef<RouterOutputs["adminRoute"]["mentor"]["getAll"][number]>[] = [
+export const columns: ColumnDef<
+  RouterOutputs["adminRoute"]["mentor"]["getAll"][number]
+>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => {
@@ -29,7 +33,7 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["mentor"]["getAll"][
           Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
   },
   {
@@ -40,11 +44,11 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["mentor"]["getAll"][
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Industry
+          Company
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
-    }
+      );
+    },
   },
   {
     accessorKey: "industry",
@@ -57,8 +61,8 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["mentor"]["getAll"][
           Industry
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
-    }
+      );
+    },
   },
   {
     accessorKey: "expertise",
@@ -71,8 +75,8 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["mentor"]["getAll"][
           Expertise
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
-    }
+      );
+    },
   },
   {
     accessorKey: "courses",
@@ -85,17 +89,13 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["mentor"]["getAll"][
           Course
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
-      const courseCount:MentorCourse = row.getValue("courses");
+      const courseCount: MentorCourse = row.getValue("courses");
 
-      return (
-        <Badge>
-          {courseCount.length}
-        </Badge>
-      )
-    }
+      return <Badge>{courseCount.length}</Badge>;
+    },
   },
   {
     accessorKey: "mentoring",
@@ -108,19 +108,17 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["mentor"]["getAll"][
           Mentoring Status
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
       const isMentoring: MentorMentoring = row.getValue("mentoring");
 
       return (
-        <Badge className={
-          (isMentoring === null) ? "bg-red-300" : "bg-slate-500"
-        }>
-          {(isMentoring === null) ? "Inactive" : "Active"}
+        <Badge className={isMentoring === null ? "bg-red-300" : "bg-slate-500"}>
+          {isMentoring === null ? "Inactive" : "Active"}
         </Badge>
-      )
-    }
+      );
+    },
   },
   {
     id: "actions",
@@ -138,13 +136,13 @@ export const columns: ColumnDef<RouterOutputs["adminRoute"]["mentor"]["getAll"][
           <DropdownMenuContent align="end">
             <Link href={`/dashboard/admin/courses/${id}`}>
               <DropdownMenuItem>
-                <Pencil className="h-4 w-4 mr-2" />
+                <Pencil className="mr-2 h-4 w-4" />
                 Edit
               </DropdownMenuItem>
             </Link>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
-    }
-  }
-]
+      );
+    },
+  },
+];

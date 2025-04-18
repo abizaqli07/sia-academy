@@ -1,12 +1,13 @@
 import { TRPCError } from "@trpc/server";
-import { createTRPCRouter, protectedProcedure } from "../../trpc";
+import { desc, eq } from "drizzle-orm";
+import { category, mentor, mentoring } from "~/server/db/schema";
 import {
   MentoringIdSchema,
   RegisterMentoringSchema,
   UpdateMentoringSchema,
+  UpdateMentorSchema,
 } from "~/server/validator/mentoring";
-import { category, mentoring } from "~/server/db/schema";
-import { desc, eq } from "drizzle-orm";
+import { createTRPCRouter, protectedProcedure } from "../../trpc";
 
 export const mentoringRouter = createTRPCRouter({
   registerMentoring: protectedProcedure
@@ -69,6 +70,34 @@ export const mentoringRouter = createTRPCRouter({
           ...res,
         })
         .where(eq(mentoring.id, id ?? ""))
+        .returning();
+
+      return mentorings;
+    }),
+  updateMentor: protectedProcedure
+    .input(UpdateMentorSchema)
+    .mutation(async ({ ctx, input }) => {
+      const existed = await ctx.db.query.mentor
+        .findFirst({
+          where: (mentor, { eq }) => eq(mentor.id, input.id ?? ""),
+        })
+        .execute();
+
+      if (!existed) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Mentor Not Found",
+        });
+      }
+
+      const { id, ...res } = input;
+
+      const mentorings = await ctx.db
+        .update(mentor)
+        .set({
+          ...res,
+        })
+        .where(eq(mentor.id, id ?? ""))
         .returning();
 
       return mentorings;

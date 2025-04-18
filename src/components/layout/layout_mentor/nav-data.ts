@@ -29,10 +29,4 @@ export const navItems: NavItem[] = [
     icon: "user",
     label: "mentor",
   },
-  {
-    title: "Settings",
-    href: "/dashboard/mentor/settings",
-    icon: "settings",
-    label: "settings",
-  },
 ];

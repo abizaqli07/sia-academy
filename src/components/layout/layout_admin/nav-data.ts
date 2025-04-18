@@ -18,6 +18,12 @@ export const navItems: NavItem[] = [
     label: "Dashboard",
   },
   {
+    title: "Category",
+    href: "/dashboard/admin/category",
+    icon: "gridCheck",
+    label: "Category",
+  },
+  {
     title: "All Course",
     href: "/dashboard/admin/courses",
     icon: "laptop",
@@ -28,11 +34,5 @@ export const navItems: NavItem[] = [
     href: "/dashboard/admin/mentors",
     icon: "user",
     label: "mentor",
-  },
-  {
-    title: "Settings",
-    href: "/dashboard/admin/settings",
-    icon: "settings",
-    label: "settings",
   },
 ];
