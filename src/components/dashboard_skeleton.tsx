@@ -3,7 +3,7 @@ import { Skeleton } from "~/components/ui/skeleton";
 
 const UserDashboardSkeleton = () => {
   return (
-    <div className="flex h-[300px] w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 md:flex-row">
+    <div className="flex h-[300px] w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white dark:bg-primary-dark p-4 md:flex-row">
       <div className="aspect-square flex-[2] md:aspect-[3/2]">
         <Skeleton className="h-full w-full" />
       </div>

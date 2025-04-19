@@ -20,7 +20,7 @@ const MyMentoringList = ({ data }: MyMentoringListPropsInterface) => {
             ))}
           </div>
         ) : (
-          <div className="flex h-[200px] flex-col items-center justify-center gap-y-3 rounded-lg bg-gray-200 px-24 py-4 text-center">
+          <div className="flex h-[200px] flex-col items-center justify-center gap-y-3 rounded-lg bg-gray-200 dark:bg-primary-dark px-24 py-4 text-center">
             <div className="text-2xl font-semibold">Belum Ada Mentoring</div>
             <Link href={"/dashboard/user/mentoring"}>
               <Button>Temukan Mentoring</Button>

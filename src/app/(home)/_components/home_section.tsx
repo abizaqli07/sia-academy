@@ -230,7 +230,7 @@ const HomeSection = ({
                         ? `/dashboard/user/course/${data.id}`
                         : "/auth/signin"
                     }
-                    className="flex w-full max-w-[320px] flex-col gap-6 rounded-lg p-4 shadow-md"
+                    className="flex w-full max-w-[320px] flex-col gap-6 rounded-lg p-4 shadow-md dark:bg-primary-dark"
                   >
                     <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg bg-gray-500">
                       <Image
@@ -279,7 +279,7 @@ const HomeSection = ({
                   </Link>
                 ))
               ) : (
-                <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 px-24 py-4 text-center">
+                <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 dark:bg-primary-dark px-24 py-4 text-center">
                   <div className="text-2xl font-semibold">
                     Belum Ada Bootcamp
                   </div>
@@ -294,7 +294,7 @@ const HomeSection = ({
                       ? `/dashboard/user/mentoring/${data.id}`
                       : "/auth/signin"
                   }
-                  className="flex w-full max-w-[330px] flex-col justify-between gap-6 rounded-lg p-4 shadow-md"
+                  className="flex w-full max-w-[330px] flex-col justify-between gap-6 rounded-lg p-4 shadow-md dark:bg-primary-dark"
                 >
                   <div className="w-full space-y-6">
                     <div className="relative aspect-[1/1] w-full overflow-hidden rounded-lg bg-gray-500">
@@ -346,7 +346,7 @@ const HomeSection = ({
                 </Link>
               ))
             ) : (
-              <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 px-24 py-4 text-center">
+              <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 dark:bg-primary-dark px-24 py-4 text-center">
                 <div className="text-2xl font-semibold">
                   Belum Ada Mentoring
                 </div>

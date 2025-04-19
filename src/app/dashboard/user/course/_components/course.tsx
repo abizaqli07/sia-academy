@@ -32,7 +32,7 @@ const CourseSection = ({ courses }: CourseSectionPropsInterface) => {
                 <Link
                   key={data.id}
                   href={`/dashboard/user/course/${data.id}`}
-                  className="flex w-full max-w-[320px] flex-col gap-6 rounded-lg p-4 shadow-md"
+                  className="flex w-full max-w-[320px] flex-col gap-6 rounded-lg p-4 shadow-md dark:bg-primary-dark"
                 >
                   <div>
                     <div className="w-full rounded-t-lg bg-primary p-3 text-center font-bold text-white">

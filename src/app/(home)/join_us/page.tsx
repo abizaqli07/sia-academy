@@ -14,7 +14,7 @@ const JoinUsPage = () => {
       <section className="container mx-auto mt-[14vh] min-h-[86vh]">
         <div className="flex h-[80vh] w-full flex-col-reverse gap-8 md:flex-row">
           <div className="flex h-full flex-col gap-8 md:flex-[3]">
-            <div className="w-full flex-[4] rounded-2xl bg-gray-200 p-4">
+            <div className="w-full flex-[4] rounded-2xl bg-gray-200 dark:bg-primary-dark p-4">
               <div className="flex h-full w-full flex-col justify-between">
                 <div className="space-y-8">
                   {/* Title */}

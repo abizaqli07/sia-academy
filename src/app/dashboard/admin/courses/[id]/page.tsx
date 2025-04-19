@@ -118,7 +118,7 @@ const CourseDetailPage = () => {
               </div>
 
               {/* Edit Details */}
-              <div className="mt-6 rounded-md border bg-slate-100 p-4">
+              <div className="mt-6 rounded-md border bg-slate-100 dark:bg-primary-dark p-4">
                 <div className="flex items-center justify-between font-medium">
                   Course Details
                   <Link href={`/dashboard/admin/courses/${id}/details`}>

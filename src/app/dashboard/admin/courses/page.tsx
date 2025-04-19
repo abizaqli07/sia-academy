@@ -4,6 +4,7 @@ import { api } from "~/trpc/react";
 import { columns } from "./_components/columns";
 import { DataTable } from "./_components/data-table";
 import { Loader2 } from "lucide-react";
+import { ScrollArea } from "~/components/ui/scroll-area";
 
 const CoursesPage = () => {
   const { data, isLoading, isError } =
@@ -29,9 +30,11 @@ const CoursesPage = () => {
   }
 
   return (
-    <div className="p-6">
-      <DataTable columns={columns} data={data} />
-    </div>
+    <ScrollArea className="h-full w-full">
+      <div className="p-6">
+        <DataTable columns={columns} data={data} />
+      </div>
+    </ScrollArea>
   );
 };
 

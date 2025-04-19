@@ -9,7 +9,7 @@ const BootcampBenefitComp = () => {
         Banyak Manfaat <br /> yang kamu dapatkan
       </div>
       <div className=" mt-8 flex flex-wrap justify-center gap-8">
-        <div className="flex max-w-[260px] flex-col items-center gap-3 rounded-lg p-4 text-gray-700 shadow-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-white hover:shadow-lg">
+        <div className="flex max-w-[260px] flex-col items-center gap-3 rounded-lg p-4 text-gray-700 dark:text-gray-300 shadow-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-white hover:shadow-lg">
           <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-primary-dark">
             <BiSolidVideoRecording className="text-3xl text-primary" />
           </div>
@@ -22,7 +22,7 @@ const BootcampBenefitComp = () => {
             melalui website
           </div>
         </div>
-        <div className="flex max-w-[260px] flex-col items-center gap-3 rounded-lg p-4 text-gray-700 shadow-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-white hover:shadow-lg">
+        <div className="flex max-w-[260px] flex-col items-center gap-3 rounded-lg p-4 text-gray-700 dark:text-gray-300 shadow-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-white hover:shadow-lg">
           <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-primary-dark">
             <TbCertificate className="text-3xl text-primary" />
           </div>
@@ -32,7 +32,7 @@ const BootcampBenefitComp = () => {
             diberikan di akhir bootcamp dengan predikat Entry Level
           </div>
         </div>
-        <div className="flex max-w-[260px] flex-col items-center gap-3 rounded-lg p-4 text-gray-700 shadow-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-white hover:shadow-lg">
+        <div className="flex max-w-[260px] flex-col items-center gap-3 rounded-lg p-4 text-gray-700 dark:text-gray-300 shadow-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-white hover:shadow-lg">
           <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-primary-dark">
             <GrDocumentConfig className="text-3xl text-primary" />
           </div>

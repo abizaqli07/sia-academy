@@ -30,7 +30,7 @@ const MentorSection = ({ mentorings }: mentoringPropsInterface) => {
                 <Link
                   key={data.id}
                   href={`/dashboard/user/mentoring/${data.id}`}
-                  className="flex w-full max-w-[330px] flex-col justify-between gap-6 rounded-lg p-4 shadow-md"
+                  className="flex w-full max-w-[330px] flex-col justify-between gap-6 rounded-lg p-4 shadow-md dark:bg-primary-dark"
                 >
                   <div className="w-full space-y-6">
                     <div className="relative aspect-[1/1] w-full overflow-hidden rounded-lg bg-gray-500">
@@ -51,7 +51,7 @@ const MentorSection = ({ mentorings }: mentoringPropsInterface) => {
                       <div className="text-base font-semibold">
                         {data.mentor.title}
                       </div>
-                      <div className="mt-3 flex items-center gap-3 text-gray-700">
+                      <div className="mt-3 flex items-center gap-3 text-gray-700 dark:text-gray-500">
                         <div className="flex items-center gap-2 font-medium">
                           <IoMdBook className="text-xl" /> {data.mentor.company}
                         </div>

@@ -50,10 +50,10 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 243 36% 49%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 342 100% 64%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
@@ -97,7 +97,7 @@
   }
 
   .footer__box {
-    @apply flex h-full w-full flex-col justify-between gap-y-8 rounded-3xl bg-gray-100 p-6 md:flex-[1];
+    @apply flex h-full w-full flex-col justify-between gap-y-8 rounded-3xl bg-gray-100 dark:bg-primary-dark p-6 md:flex-[1];
   }
 
   .about__svg {

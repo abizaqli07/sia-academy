@@ -39,17 +39,39 @@ const Login = () => {
     await signIn("credentials", {
       ...values,
       redirect: false,
-    })
-    .then((callback) => {
+    }).then((callback) => {
       if (callback?.error) {
-        toast({
-          title: "Something went wrong",
-          description: callback.error,
-          variant: "destructive",
-        });
+        if (callback.code === "NotFound") {
+          toast({
+            title: "Login Failed",
+            description: "User dengan email ini tidak ditemukan",
+            variant: "destructive",
+          });
+        }
+        if (callback.code === "NotConfigured") {
+          toast({
+            title: "Login Failed",
+            description: "Password belum dikonfigurasi",
+            variant: "destructive",
+          });
+        }
+        if (callback.code === "NotMatch") {
+          toast({
+            title: "Login Failed",
+            description: "Password salah",
+            variant: "destructive",
+          });
+        }
+        if (callback.code === "Other") {
+          toast({
+            title: "Login Failed",
+            description: "Terjadi kesalahan di server",
+            variant: "destructive",
+          });
+        }
       }
 
-      if (callback?.ok) {
+      if (callback?.ok && !callback.error) {
         router.push(`${search ?? "/redirect"}`);
       }
     });
@@ -69,15 +91,15 @@ const Login = () => {
       <div className="flex flex-1 items-center justify-center">
         <div className="flex min-h-full w-full max-w-[600px] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            {/* <Image
-              className="mx-auto"
+            <Image
+              className="mx-auto dark:invert"
               src="/logo.png"
               alt="Linkup"
               width={150}
-              height={20}
-            /> */}
-            <div className="text-center text-3xl font-bold">SIA Academy</div>
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              height={150}
+            />
+            {/* <div className="text-center text-3xl font-bold">SIA Academy</div> */}
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-300">
               Masuk ke akun anda
             </h2>
           </div>

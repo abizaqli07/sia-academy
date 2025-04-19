@@ -1,17 +1,10 @@
 "use client";
 
 import { type ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
-import Link from "next/link";
+import { ArrowUpDown } from "lucide-react";
 
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
 import { type RouterOutputs } from "~/trpc/react";
 
 type MentorCourse =
@@ -114,35 +107,35 @@ export const columns: ColumnDef<
       const isMentoring: MentorMentoring = row.getValue("mentoring");
 
       return (
-        <Badge className={isMentoring === null ? "bg-red-300" : "bg-slate-500"}>
+        <Badge className={isMentoring === null ? "bg-red-300" : "bg-primary"}>
           {isMentoring === null ? "Inactive" : "Active"}
         </Badge>
       );
     },
   },
-  {
-    id: "actions",
-    cell: ({ row }) => {
-      const { id } = row.original;
+  // {
+  //   id: "actions",
+  //   cell: ({ row }) => {
+  //     const { id } = row.original;
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-4 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <Link href={`/dashboard/admin/courses/${id}`}>
-              <DropdownMenuItem>
-                <Pencil className="mr-2 h-4 w-4" />
-                Edit
-              </DropdownMenuItem>
-            </Link>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
+  //     return (
+  //       <DropdownMenu>
+  //         <DropdownMenuTrigger asChild>
+  //           <Button variant="ghost" className="h-4 w-8 p-0">
+  //             <span className="sr-only">Open menu</span>
+  //             <MoreHorizontal className="h-4 w-4" />
+  //           </Button>
+  //         </DropdownMenuTrigger>
+  //         <DropdownMenuContent align="end">
+  //           <Link href={`/dashboard/admin/courses/${id}`}>
+  //             <DropdownMenuItem>
+  //               <Pencil className="mr-2 h-4 w-4" />
+  //               Edit
+  //             </DropdownMenuItem>
+  //           </Link>
+  //         </DropdownMenuContent>
+  //       </DropdownMenu>
+  //     );
+  //   },
+  // },
 ];

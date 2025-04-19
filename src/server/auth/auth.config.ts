@@ -3,6 +3,7 @@ import { type NextAuthConfig, type User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { db } from "~/server/db";
 import { LoginSchema } from "~/server/validator/auth";
+import { InvalidLoginError } from "./invalid_login_error";
 
 const authDefaultConfig: NextAuthConfig = {
   providers: [
@@ -31,21 +32,21 @@ const authDefaultConfig: NextAuthConfig = {
           });
 
           if (!user) {
-            throw new Error("User not found!");
+            throw new InvalidLoginError("NotFound");
           }
 
           if (!user.password) {
-            throw new Error("You're not configured password yet");
+            throw new InvalidLoginError("NotConfigured");
           }
 
           const passwordMatch = await compare(password, user.password);
 
           if (!passwordMatch) {
-            throw new Error(" Email and password doest match");
+            throw new InvalidLoginError("NotMatch");
           }
 
           if (!credentials) {
-            throw new Error("Something went wrong");
+            throw new InvalidLoginError("Other");
           }
 
           const userData: User = {

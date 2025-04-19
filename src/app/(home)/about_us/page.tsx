@@ -33,7 +33,7 @@ const AboutUsPage = () => {
                 praktis, wawasan industri, dan dukungan langsung dari
                 mentor-mentor profesional.
               </div>
-              <div className="flex w-fit items-center justify-center gap-4 rounded-full bg-gray-100 px-8 py-4">
+              <div className="flex w-fit items-center justify-center gap-4 rounded-full bg-gray-100 dark:bg-primary-dark px-8 py-4">
                 <div>Lebih Banyak</div>
                 <ArrowUpRight />
               </div>

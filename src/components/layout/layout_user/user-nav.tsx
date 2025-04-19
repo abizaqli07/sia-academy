@@ -10,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 
 export function UserNav({ session }: { session: Session | null }) {
@@ -19,7 +19,7 @@ export function UserNav({ session }: { session: Session | null }) {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={""} alt="User" />
+            <AvatarImage src={session?.user.image ?? ""} alt="User" />
             <AvatarFallback>AA</AvatarFallback>
           </Avatar>
         </Button>

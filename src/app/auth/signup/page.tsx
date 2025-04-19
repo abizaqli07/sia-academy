@@ -83,15 +83,15 @@ const Register = () => {
       <div className="flex flex-1 items-center justify-center">
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            {/* <Image
-              className="mx-auto"
+            <Image
+              className="mx-auto dark:invert"
               src="/logo.png"
               alt="Linkup"
               width={150}
-              height={20}
-            /> */}
-            <div className="text-center text-3xl font-bold">SIA Academy</div>
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              height={150}
+            />
+            {/* <div className="text-center text-3xl font-bold">SIA Academy</div> */}
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-300">
               Buat akun anda
             </h2>
           </div>

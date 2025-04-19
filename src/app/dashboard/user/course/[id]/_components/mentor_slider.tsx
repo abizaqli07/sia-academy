@@ -58,7 +58,7 @@ const MentoringSlider = ({ data: mentors }: MentorSliderPropsInterface) => {
         {mentors?.mentors !== undefined && mentors?.mentors.length > 0 ? (
           mentors?.mentors.map((data) => (
             <SwiperSlide key={data.mentor.id}>
-              <div className="flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 sm:flex-row">
+              <div className="flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white dark:bg-primary-dark p-4 sm:flex-row">
                 <div className="aspect-square max-w-[280px] flex-1 rounded-lg bg-primary">
                   <div className="relative h-full w-full">
                     <Image
@@ -76,7 +76,7 @@ const MentoringSlider = ({ data: mentors }: MentorSliderPropsInterface) => {
                   <div className="text-sm font-bold text-gray-500">
                     {data.mentor?.title}
                   </div>
-                  <div className="text-justify text-gray-700">
+                  <div className="text-justify text-gray-700 dark:text-gray-300">
                     {data.mentor?.desc}
                   </div>
                   <div className="flex gap-3">
@@ -105,7 +105,7 @@ const MentoringSlider = ({ data: mentors }: MentorSliderPropsInterface) => {
           <SwiperSlide>
             <Link
               href={"/career_guidance/one_on_one"}
-              className="mx-auto flex aspect-[3/1] w-full flex-col items-center justify-center gap-4 rounded-lg border-[1.5px] bg-white p-4 md:flex-row"
+              className="mx-auto flex aspect-[3/1] w-full flex-col items-center justify-center gap-4 rounded-lg border-[1.5px] bg-white dark:bg-primary-dark p-4 md:flex-row"
             >
               <div className="text-2xl font-semibold">No Mentor Found</div>
             </Link>

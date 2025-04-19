@@ -50,7 +50,7 @@ const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
   }
 
   return (
-    <div className="relative flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 md:flex-row">
+    <div className="relative flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white dark:bg-primary-dark p-4 md:flex-row">
       <div className="left-0 top-0 z-30 rounded-lg bg-primary px-4 py-2 font-semibold text-white md:absolute md:rounded-bl-none md:rounded-tr-none">
         {data.course?.isWebinar ? "Webinar" : "Bootcamp"}
       </div>

@@ -25,7 +25,7 @@ const Aimasterclass = async ({
 
   return (
     <div>
-      <div className="absolute left-0 top-0 -z-10 h-[25vh] w-full bg-primary-dark"></div>
+      <div className="absolute left-0 top-0 -z-10 h-[25vh] w-full bg-primary-dark dark:bg-primary"></div>
       <DetailMentorSection data={mentoring} session={session} />
     </div>
   );

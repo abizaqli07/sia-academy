@@ -77,7 +77,7 @@ export const CourseSale = ({ initialData, courseId }: CourseSaleProps) => {
   };
 
   return (
-    <div className="mt-6 rounded-md border bg-slate-100 p-4">
+    <div className="mt-6 rounded-md border bg-slate-100 dark:bg-primary-dark p-4">
       <div className="flex items-center justify-between font-medium">
         Course Sale (optional)
         <Button onClick={toggleEdit} variant="ghost">
@@ -93,7 +93,7 @@ export const CourseSale = ({ initialData, courseId }: CourseSaleProps) => {
       </div>
       {!isEditing && (
         <div
-          className={`mt-4 w-full rounded-sm p-2 text-center ${initialData.isSale ? "bg-slate-200 " : "border border-slate-300 font-semibold"}`}
+          className={`mt-4 w-full rounded-sm p-2 text-center ${initialData.isSale ? "bg-slate-200 dark:bg-primary " : "border border-slate-300 font-semibold"}`}
         >
           <p className="text-base">
             {initialData.isSale

@@ -8,7 +8,6 @@ import { MdOutlineDateRange } from "react-icons/md";
 import { SiOpslevel } from "react-icons/si";
 import { type z } from "zod";
 import BootcampBenefitComp from "~/components/section/bootcamp_benefit";
-import MentoringBenefitComp from "~/components/section/mentoring_benefit";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
@@ -41,7 +40,8 @@ const CourseDetailSection = ({ data }: CourseDetailPropsInterface) => {
             {data?.isFree && (
               <div className="w-full space-y-4">
                 <div className="text-lg font-bold">
-                  PENGETAHUAN INDUSTRI EKSKLUSIF {data.isFree ? ", GRATIS!" : ""}
+                  PENGETAHUAN INDUSTRI EKSKLUSIF{" "}
+                  {data.isFree ? ", GRATIS!" : ""}
                 </div>
                 <div className="text-5xl font-bold text-primary">
                   {data.title}
@@ -54,7 +54,7 @@ const CourseDetailSection = ({ data }: CourseDetailPropsInterface) => {
           </div>
 
           {/* Benefit */}
-          {data?.isFree ? <MentoringBenefitComp /> : <BootcampBenefitComp />}
+          <BootcampBenefitComp />
 
           <Separator className="mt-[20px] bg-gray-400" />
 
@@ -97,7 +97,7 @@ const CourseDetailSection = ({ data }: CourseDetailPropsInterface) => {
 
         {/* Right Section */}
         <section className="relative hidden min-h-screen w-full flex-[1] pt-[12.5vh] lg:flex">
-          <div className="sticky top-[12.5vh] flex h-fit w-full flex-col gap-4 rounded-lg bg-gray-200 p-4">
+          <div className="sticky top-[12.5vh] flex h-fit w-full flex-col gap-4 rounded-lg bg-gray-200 p-4 dark:border-2 dark:border-gray-500 dark:bg-background">
             <BuySection data={data} />
           </div>
         </section>
@@ -113,7 +113,8 @@ const BuySection = ({ data }: CourseDetailPropsInterface) => {
 
   const HDate = data?.date?.valueOf() ?? Date.now().valueOf();
 
-  const isAvailable = HDate > Date.now().valueOf();
+  const isNotAvailable =
+    HDate < Date.now().valueOf() && data?.isWebinar === true;
 
   const createInvoice = api.userRoute.purchase.purchaseCourse.useMutation({
     async onSuccess(data) {
@@ -141,7 +142,7 @@ const BuySection = ({ data }: CourseDetailPropsInterface) => {
   return (
     <>
       <div className="text-2xl font-bold">{data?.title}</div>
-      <div className="flex flex-col gap-3 text-sm font-medium text-gray-700">
+      <div className="flex flex-col gap-3 text-sm font-medium text-gray-700 dark:text-gray-300">
         <div className="flex items-center gap-2">
           <MdOutlineDateRange className="text-xl" />
           {data?.date?.toLocaleDateString("in-ID")}
@@ -163,7 +164,7 @@ const BuySection = ({ data }: CourseDetailPropsInterface) => {
         </div>
       </div>
       <Separator className="bg-gray-400" />
-      <div className="flex w-full flex-col gap-3 rounded-lg bg-gray-200 p-4">
+      <div className="flex w-full flex-col gap-3 rounded-lg bg-gray-200 p-4 dark:bg-primary-dark">
         {data?.isSale ?? data?.isFree ? (
           <Badge variant={"destructive"} className="w-fit">
             Promo
@@ -197,12 +198,12 @@ const BuySection = ({ data }: CourseDetailPropsInterface) => {
               courseId: data?.id ?? "",
             })
           }
-          disabled={!isAvailable}
+          disabled={isNotAvailable}
         >
-          {isAvailable ? "Daftar Sekarang" : "Pendaftaran Ditutup"}
+          {isNotAvailable ? "Pendaftaran Ditutup" : "Daftar Sekarang"}
         </Button>
 
-        {!isAvailable && (
+        {isNotAvailable && (
           <div className="text-center text-sm font-medium text-red-500">
             *Tunggu webinar kami selanjutnya*
           </div>

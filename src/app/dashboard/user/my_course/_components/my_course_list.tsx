@@ -55,7 +55,7 @@ const MyCourseList = ({ data }: MyCourseListPropsInterface) => {
               ))}
             </div>
           ) : (
-            <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 px-24 py-4 text-center gap-y-3 flex-col">
+            <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 dark:bg-primary-dark px-24 py-4 text-center gap-y-3 flex-col">
               <div className="text-2xl font-semibold">Belum Ada Webinar</div>
               <Link href={"/dashboard/user/course"}>
                 <Button>Temukan Webinar</Button>
@@ -70,7 +70,7 @@ const MyCourseList = ({ data }: MyCourseListPropsInterface) => {
               ))}
             </div>
           ) : (
-            <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 px-24 py-4 text-center gap-y-3 flex-col">
+            <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 dark:bg-primary-dark px-24 py-4 text-center gap-y-3 flex-col">
               <div className="text-2xl font-semibold">Belum Ada Bootcamp</div>
               <Link href={"/dashboard/user/course"}>
                 <Button>Temukan Bootcamp</Button>

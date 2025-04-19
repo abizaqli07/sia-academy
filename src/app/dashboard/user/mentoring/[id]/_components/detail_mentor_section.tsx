@@ -49,7 +49,7 @@ const DetailMentorSection = ({
               <br />
               Get to Know Our Mentor!
             </div>
-            <div className="flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 sm:flex-row">
+            <div className="flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white dark:bg-primary-dark p-4 sm:flex-row">
               <div className="aspect-square max-w-[280px] flex-1 rounded-lg bg-primary">
                 <div className="relative h-full w-full">
                   <Image
@@ -65,7 +65,7 @@ const DetailMentorSection = ({
                 <div className="text-sm font-bold text-gray-500">
                   {data?.mentor.title}
                 </div>
-                <div className="text-justify text-gray-700">
+                <div className="text-justify text-gray-700 dark:text-gray-300">
                   {data?.mentor.desc}
                 </div>
                 <div className="flex gap-3">
@@ -117,7 +117,7 @@ const DetailMentorSection = ({
 
         {/* Right Section */}
         <section className="relative hidden min-h-screen w-full flex-[1] pt-[12.5vh] lg:flex">
-          <div className=" sticky top-[12.5vh] flex h-fit w-full flex-col gap-4 rounded-lg bg-gray-200 p-4">
+          <div className=" sticky top-[12.5vh] flex h-fit w-full flex-col gap-4 rounded-lg bg-gray-200 dark:bg-background dark:border-2 dark:border-gray-500 p-4">
             <BuySection data={data} session={session} />
           </div>
         </section>
@@ -132,7 +132,7 @@ const BuySection = ({ data, session }: DetailMentoringPropsInterface) => {
       <div className="text-2xl font-bold">
         Let&#39;s Have A Mentoring Session
       </div>
-      <div className="flex flex-col gap-3 text-sm font-medium text-gray-700">
+      <div className="flex flex-col gap-3 text-sm font-medium text-gray-700 dark:text-gray-300">
         <div
           className="space-y-4"
           dangerouslySetInnerHTML={{ __html: data?.desc ?? "" }}

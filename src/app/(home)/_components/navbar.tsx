@@ -66,7 +66,7 @@ const Navbar = ({ session }: NavbarProps) => {
     <div
       className={`absolute top-4 z-50 w-full bg-transparent transition-all duration-300 ease-in-out`}
     >
-      <div className="container mx-auto flex items-center justify-between rounded-lg bg-white p-2 shadow-lg">
+      <div className="container mx-auto flex items-center justify-between rounded-lg bg-white dark:bg-primary-dark p-2 shadow-lg">
         <Link href="/">
           <LayoutGrid size={30} />
         </Link>
@@ -74,19 +74,19 @@ const Navbar = ({ session }: NavbarProps) => {
         <div className="hidden items-center gap-12 text-base md:flex lg:gap-16">
           <Link
             href={"/"}
-            className={`${pathname === "/" ? "text-primary" : "text-primary-dark"}`}
+            className={`${pathname === "/" ? "text-primary" : "text-primary-dark dark:text-gray-300"}`}
           >
             Beranda
           </Link>
           <Link
             href={"/about_us"}
-            className={`${pathname === "/about_us" ? "text-primary" : "text-primary-dark"}`}
+            className={`${pathname === "/about_us" ? "text-primary" : "text-primary-dark dark:text-gray-300"}`}
           >
             Tentang
           </Link>
           <Link
             href={"/join_us"}
-            className={`${pathname === "/join_us" ? "text-primary" : "text-primary-dark"}`}
+            className={`${pathname === "/join_us" ? "text-primary" : "text-primary-dark dark:text-gray-300"}`}
           >
             Bergabung
           </Link>
