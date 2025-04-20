@@ -62,7 +62,7 @@ const ConsultButton = ({ data }: ConsultButtonPropsInterface) => {
   const createInvoice =
     api.userRoute.mentoring.inputUserMentoringData.useMutation({
       onSuccess() {
-        router.push("https://wa.me/628179922903");
+        router.push("https://wa.me/6282131458838");
       },
       onError(error) {
         if (error.data?.code === "FORBIDDEN") {
