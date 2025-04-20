@@ -148,12 +148,8 @@ export const purchaseRouter = createTRPCRouter({
 
       let mentoringPrice = Number(mentoring.price);
 
-      if (mentoring.codePromo !== null) {
-        if (mentoring.codePromo.code === input.referral) {
-          mentoringPrice =
-            Number(mentoring.price) -
-            Number(mentoring.price) * (mentoring.codePromo.percentage / 100);
-        }
+      if(mentoringPrice === 0){
+        mentoringPrice = 100;
       }
 
       const DateId = +new Date();
