@@ -101,7 +101,9 @@ const MyMentoringCard = ({ data }: MyMentoringCardPropsInterface) => {
         <Separator />
         <div className="flex w-full items-center justify-between">
           <div className="font-medium">Status</div>
-          {paymentComplete ? (
+          {data?.status === "FREE" ? (
+            <Badge>Free</Badge>
+          ) : paymentComplete ? (
             <Badge>{status}</Badge>
           ) : invoiceData?.status === "EXPIRED" ? (
             <Badge variant={"destructive"}>Expired</Badge>
