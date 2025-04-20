@@ -51,7 +51,7 @@ const MyMentoringCard = ({ data }: MyMentoringCardPropsInterface) => {
   }
 
   return (
-    <div className="relative flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white dark:bg-primary-dark p-4 md:flex-row">
+    <div className="relative flex w-full flex-col gap-4 rounded-lg border-[1.5px] bg-white p-4 dark:bg-primary-dark md:flex-row">
       <div className="left-0 top-0 z-30 rounded-lg bg-primary px-4 py-2 font-semibold text-white md:absolute md:rounded-bl-none md:rounded-tr-none">
         Mentoring
       </div>
@@ -85,11 +85,15 @@ const MyMentoringCard = ({ data }: MyMentoringCardPropsInterface) => {
               </div>
             ))}
         </div>
-        {data.status === "PURCHASED" && (
+        {invoiceData?.status === "PAID" ||
+        invoiceData?.status === "SETTLED" ||
+        data.status === "FREE" ? (
           <RequestButton
             mentoringDataId={data.mentoringId ?? ""}
             schedules={recentSession}
           />
+        ) : (
+          <></>
         )}
         <Separator />
         <div className="flex w-full items-center justify-between">

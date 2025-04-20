@@ -74,7 +74,7 @@ export const purchaseRouter = createTRPCRouter({
             .values({
               userId: ctx.session.user.id,
               courseId: course.id,
-              status: "PENDING",
+              status: "FREE",
               invoiceId: String(DateId),
               invoiceUrl: "",
             })
@@ -148,7 +148,7 @@ export const purchaseRouter = createTRPCRouter({
 
       let mentoringPrice = Number(mentoring.price);
 
-      if(mentoringPrice === 0){
+      if (mentoringPrice === 0) {
         mentoringPrice = 100;
       }
 
@@ -170,55 +170,105 @@ export const purchaseRouter = createTRPCRouter({
         ],
       };
 
-      try {
-        const invoice = await ctx.xnd.Invoice.createInvoice({
-          data,
-        });
-
-        const insertUserData = await ctx.db
-          .insert(userMentoringData)
-          .values({
-            userId: ctx.session.user.id,
-            mentoringId: input.mentoringId,
-            objective: input.objective,
-            preference: input.preference,
-            positionPreference: input.positionPreference,
-            referral: input.referral,
-            cv: input.cv,
-          })
-          .onConflictDoUpdate({
-            target: [userMentoringData.userId, userMentoringData.mentoringId],
-            set: {
+      if (Number(mentoring.price) === 0) {
+        try {
+          const insertUserData = await ctx.db
+            .insert(userMentoringData)
+            .values({
+              userId: ctx.session.user.id,
+              mentoringId: input.mentoringId,
               objective: input.objective,
               preference: input.preference,
               positionPreference: input.positionPreference,
               referral: input.referral,
               cv: input.cv,
-            },
-          })
-          .returning();
-
-        if (insertUserData) {
-          await ctx.db
-            .insert(purchase)
-            .values({
-              userId: ctx.session.user.id,
-              mentoringId: insertUserData[0]?.id,
-              invoiceId: invoice.id,
-              invoiceUrl: invoice.invoiceUrl,
+            })
+            .onConflictDoUpdate({
+              target: [userMentoringData.userId, userMentoringData.mentoringId],
+              set: {
+                objective: input.objective,
+                preference: input.preference,
+                positionPreference: input.positionPreference,
+                referral: input.referral,
+                cv: input.cv,
+              },
             })
             .returning();
-        }
 
-        return {
-          url: invoice.invoiceUrl,
-          error: null,
-        };
-      } catch (error) {
-        return {
-          url: null,
-          error: error,
-        };
+          if (insertUserData) {
+            await ctx.db
+              .insert(purchase)
+              .values({
+                userId: ctx.session.user.id,
+                mentoringId: insertUserData[0]?.id,
+                status: "FREE",
+                invoiceId: String(DateId),
+                invoiceUrl: "",
+              })
+              .returning();
+          }
+
+          return {
+            url: `${getBaseProductionUrl()}/dashboard/user/my_mentoring`,
+            error: null,
+          };
+        } catch (error) {
+          return {
+            url: null,
+            error: error,
+          };
+        }
+      } else {
+        try {
+          const invoice = await ctx.xnd.Invoice.createInvoice({
+            data,
+          });
+
+          const insertUserData = await ctx.db
+            .insert(userMentoringData)
+            .values({
+              userId: ctx.session.user.id,
+              mentoringId: input.mentoringId,
+              objective: input.objective,
+              preference: input.preference,
+              positionPreference: input.positionPreference,
+              referral: input.referral,
+              cv: input.cv,
+            })
+            .onConflictDoUpdate({
+              target: [userMentoringData.userId, userMentoringData.mentoringId],
+              set: {
+                objective: input.objective,
+                preference: input.preference,
+                positionPreference: input.positionPreference,
+                referral: input.referral,
+                cv: input.cv,
+              },
+            })
+            .returning();
+
+          if (insertUserData) {
+            await ctx.db
+              .insert(purchase)
+              .values({
+                userId: ctx.session.user.id,
+                mentoringId: insertUserData[0]?.id,
+                invoiceId: invoice.id,
+                invoiceUrl: invoice.invoiceUrl,
+              })
+              .returning();
+          }
+
+          return {
+            url: invoice.invoiceUrl,
+            error: null,
+          };
+        } catch (error) {
+          return {
+            url: null,
+            error: error,
+          };
+        }
       }
     }),
   getInvoiceData: protectedProcedure
