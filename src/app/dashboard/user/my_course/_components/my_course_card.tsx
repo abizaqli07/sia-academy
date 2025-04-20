@@ -30,10 +30,15 @@ const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
   });
 
   let status = "";
+  const paymentComplete =
+    invoiceData?.status === "PAID" || invoiceData?.status === "SETTLED";
 
   if (invoiceData?.status === undefined) {
     status = "Loading";
-  } else if (invoiceData?.status === "PAID") {
+  } else if (
+    invoiceData?.status === "PAID" ||
+    invoiceData.status === "SETTLED"
+  ) {
     status = "Payment Completed";
   }
 
@@ -94,8 +99,7 @@ const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
           ) : (
             ""
           )}
-          {data.course?.isWebinar === false &&
-          invoiceData?.status === "PAID" ? (
+          {data.course?.isWebinar === false && paymentComplete ? (
             <Button
               onClick={() =>
                 router.push(`/dashboard/user/my_course/${data.courseId}`)
@@ -112,7 +116,7 @@ const MyCourseCard = ({ data }: MyCourseCardPropsInterface) => {
           <div className="font-medium">Status</div>
           {data?.status === "FREE" ? (
             <Badge>Free</Badge>
-          ) : invoiceData?.status === "PAID" ? (
+          ) : paymentComplete ? (
             <Badge>{status}</Badge>
           ) : invoiceData?.status === "EXPIRED" ? (
             <Badge variant={"destructive"}>Expired</Badge>

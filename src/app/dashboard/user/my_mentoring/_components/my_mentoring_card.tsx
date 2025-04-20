@@ -43,10 +43,15 @@ const MyMentoringCard = ({ data }: MyMentoringCardPropsInterface) => {
   }
 
   let status = "";
+  const paymentComplete =
+    invoiceData?.status === "PAID" || invoiceData?.status === "SETTLED";
 
   if (invoiceData?.status === undefined) {
     status = "Loading";
-  } else if (invoiceData?.status === "PAID") {
+  } else if (
+    invoiceData?.status === "PAID" ||
+    invoiceData?.status === "SETTLED"
+  ) {
     status = "Payment Completed";
   }
 
@@ -85,9 +90,7 @@ const MyMentoringCard = ({ data }: MyMentoringCardPropsInterface) => {
               </div>
             ))}
         </div>
-        {invoiceData?.status === "PAID" ||
-        invoiceData?.status === "SETTLED" ||
-        data.status === "FREE" ? (
+        {paymentComplete || data.status === "FREE" ? (
           <RequestButton
             mentoringDataId={data.mentoringId ?? ""}
             schedules={recentSession}
@@ -98,8 +101,7 @@ const MyMentoringCard = ({ data }: MyMentoringCardPropsInterface) => {
         <Separator />
         <div className="flex w-full items-center justify-between">
           <div className="font-medium">Status</div>
-          {invoiceData?.status === "PAID" ||
-          invoiceData?.status === "SETTLED" ? (
+          {paymentComplete ? (
             <Badge>{status}</Badge>
           ) : invoiceData?.status === "EXPIRED" ? (
             <Badge variant={"destructive"}>Expired</Badge>
