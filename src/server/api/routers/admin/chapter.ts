@@ -52,11 +52,15 @@ export const chapterAdminRouter = createTRPCRouter({
           })
           .execute();
 
-        if (existingMuxData) {
-          await ctx.muxClient.video.assets.delete(existingMuxData.assetId);
-          await ctx.db
-            .delete(muxData)
-            .where(eq(muxData.id, existingMuxData.id));
+        try {
+          if (existingMuxData) {
+            await ctx.muxClient.video.assets.delete(existingMuxData.assetId);
+            await ctx.db
+              .delete(muxData)
+              .where(eq(muxData.id, existingMuxData.id));
+          }
+        } catch (error) {
+          console.log(error);
         }
 
         const asset = await ctx.muxClient.video.assets.create({

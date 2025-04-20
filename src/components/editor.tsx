@@ -17,7 +17,7 @@ export const Editor = ({
   const ReactQuill = useMemo(() => dynamic(() => import("react-quill-new"), { ssr: false }), []);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-primary-dark">
       <ReactQuill
         theme="snow"
         value={value}
