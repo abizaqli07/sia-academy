@@ -40,7 +40,7 @@ const HomeSection = ({
         <div className="flex h-full w-full flex-col space-y-20 pt-32 md:pt-52">
           <div className="relative">
             {/* Main Header */}
-            <div className="relative z-10 flex flex-col items-center gap-12 text-3xl font-semibold md:text-4xl lg:text-6xl">
+            <div className="relative z-10 flex flex-col items-center gap-12 text-xl font-semibold md:text-4xl lg:text-6xl">
               <div className="flex items-center gap-6">
                 Semua{" "}
                 <div className="title__comp">
@@ -279,7 +279,7 @@ const HomeSection = ({
                   </Link>
                 ))
               ) : (
-                <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 dark:bg-primary-dark px-24 py-4 text-center">
+                <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 px-24 py-4 text-center dark:bg-primary-dark">
                   <div className="text-2xl font-semibold">
                     Belum Ada Bootcamp
                   </div>
@@ -346,7 +346,7 @@ const HomeSection = ({
                 </Link>
               ))
             ) : (
-              <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 dark:bg-primary-dark px-24 py-4 text-center">
+              <div className="flex h-[200px] items-center justify-center rounded-lg bg-gray-200 px-24 py-4 text-center dark:bg-primary-dark">
                 <div className="text-2xl font-semibold">
                   Belum Ada Mentoring
                 </div>

@@ -13,8 +13,8 @@ interface CourseSectionPropsInterface {
 
 const CourseSection = ({ courses }: CourseSectionPropsInterface) => {
   return (
-    <section className=" mt-[100px] w-full">
-      <div className="container flex flex-col items-center gap-8">
+    <section className="w-full">
+      <div className="flex flex-col items-center gap-8">
         <div className="flex w-full max-w-[600px] flex-col gap-4 text-center">
           <div className="text-3xl font-bold lg:text-5xl">
             Pilih <span className="text-primary">Course</span>

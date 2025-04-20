@@ -35,15 +35,17 @@ const CoursePage = async () => {
   const courses = await api.userRoute.course.getAllCourse();
 
   return (
-    <ScrollArea className="w-full h-full">
-      {/* Header Section */}
-      <BannerSliderSection bannerData={bannerData} />
+    <ScrollArea className="h-full w-full">
+      <div className="flex-1 space-y-8 p-4 pt-6 md:p-8">
+        {/* Header Section */}
+        <BannerSliderSection bannerData={bannerData} />
 
-      {/* Search Section */}
-      {/* <SearchCourse /> */}
+        {/* Search Section */}
+        {/* <SearchCourse /> */}
 
-      {/* Mentor Section */}
-      <CourseSection courses={courses} />
+        {/* Mentor Section */}
+        <CourseSection courses={courses} />
+      </div>
     </ScrollArea>
   );
 };

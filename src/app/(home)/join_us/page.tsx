@@ -12,9 +12,9 @@ const JoinUsPage = () => {
   return (
     <div className="w-full">
       <section className="container mx-auto mt-[14vh] min-h-[86vh]">
-        <div className="flex h-[80vh] w-full flex-col-reverse gap-8 md:flex-row">
+        <div className="flex md:h-[80vh] w-full flex-col-reverse gap-8 md:flex-row">
           <div className="flex h-full flex-col gap-8 md:flex-[3]">
-            <div className="w-full flex-[4] rounded-2xl bg-gray-200 dark:bg-primary-dark p-4">
+            <div className="w-full md:flex-[4] rounded-2xl bg-gray-200 dark:bg-primary-dark p-4">
               <div className="flex h-full w-full flex-col justify-between">
                 <div className="space-y-8">
                   {/* Title */}
@@ -45,7 +45,7 @@ const JoinUsPage = () => {
                 </Link>
               </div>
             </div>
-            <div className="flex w-full flex-[1] flex-col justify-between rounded-2xl bg-primary-dark p-4">
+            <div className="flex w-full md:flex-[1] flex-col justify-between rounded-2xl bg-primary-dark p-4">
               <div className="text-white">
                 <div className="text-xl">Masih ragu</div>
                 <div className="text-sm font-light">dengan SIA Academy?</div>
@@ -75,7 +75,7 @@ const JoinUsPage = () => {
               </div>
             </div>
           </div>
-          <div className="relative h-full overflow-hidden rounded-2xl p-3 md:flex-[2]">
+          <div className="relative h-[300px] md:h-full overflow-hidden rounded-2xl p-3 md:flex-[2]">
             <Image
               src="/images/hero/bg_1.jpg"
               alt="Image"

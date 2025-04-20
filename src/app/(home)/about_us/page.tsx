@@ -74,13 +74,13 @@ const AboutUsPage = () => {
           </div>
           {/* Image */}
           <div className="grid w-fit grid-cols-2 grid-rows-2 gap-4">
-            <div className="relative h-[300px] w-[200px] overflow-hidden rounded-br-[70px] rounded-tl-[70px] bg-gray-100">
+            <div className="relative h-[200px] w-[150px] sm:h-[300px] sm:w-[200px] overflow-hidden rounded-br-[70px] rounded-tl-[70px] bg-gray-100">
               <Image src="/images/hero/hero.jpg" alt="Main Image" fill />
             </div>
-            <div className="relative h-[300px] w-[200px] overflow-hidden rounded-bl-[70px] rounded-tr-[70px] bg-gray-100">
+            <div className="relative h-[200px] w-[150px] sm:h-[300px] sm:w-[200px] overflow-hidden rounded-bl-[70px] rounded-tr-[70px] bg-gray-100">
               <Image src="/images/hero/hero_3.jpg" alt="Main Image" fill />
             </div>
-            <div className="relative col-start-2 h-[300px] w-[200px] overflow-hidden rounded-bl-[70px] rounded-br-[70px] rounded-tl-[70px] bg-gray-100">
+            <div className="relative col-start-2 h-[200px] w-[150px] sm:h-[300px] sm:w-[200px] overflow-hidden rounded-bl-[70px] rounded-br-[70px] rounded-tl-[70px] bg-gray-100">
               <Image src="/images/hero/hero_2.jpg" alt="Main Image" fill />
               <div className="absolute bottom-0 left-0 right-0 top-0 bg-white/30"></div>
             </div>

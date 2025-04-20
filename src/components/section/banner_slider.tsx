@@ -81,8 +81,8 @@ const BannerSliderSection = ({ bannerData }: BannerSliderPropsInterface) => {
   }
 
   return (
-    <section className="mt-[130px] aspect-square w-full md:mt-[80px] md:aspect-[3/1] md:max-h-[450px]">
-      <div className="container relative h-full overflow-hidden">
+    <section className="aspect-square w-full md:aspect-[3/1] md:max-h-[450px]">
+      <div className="relative h-full overflow-hidden">
         <div className="relative h-full w-full">
           <AnimatePresence initial={false} custom={direction}>
             <motion.img

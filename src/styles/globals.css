@@ -93,7 +93,7 @@
 
   /* ================ Main Menu Components =================== */
   .title__comp {
-    @apply relative aspect-[4/2] w-[100px] shrink-0 overflow-hidden rounded-full bg-gray-300 md:w-[150px] lg:w-[170px];
+    @apply relative aspect-[4/2] w-[60px] sm:w-[100px] shrink-0 overflow-hidden rounded-full bg-gray-300 md:w-[150px] lg:w-[170px];
   }
 
   .footer__box {
