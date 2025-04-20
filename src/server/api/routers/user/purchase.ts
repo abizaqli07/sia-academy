@@ -51,7 +51,7 @@ export const purchaseRouter = createTRPCRouter({
         amount: Number(
           course.isFree ? 100 : course.isSale ? course.salePrice : course.price,
         ),
-        successRedirectUrl: `${getBaseProductionUrl()}dashboard/user/my_course`,
+        successRedirectUrl: `${getBaseProductionUrl()}/dashboard/user/my_course`,
         items: [
           {
             name: course.title,
@@ -164,7 +164,7 @@ export const purchaseRouter = createTRPCRouter({
         description: `Purchasing mentoring ${mentoring.title}`,
         currency: "IDR",
         amount: mentoringPrice,
-        successRedirectUrl: `${getBaseProductionUrl()}dashboard/user/my_mentoring`,
+        successRedirectUrl: `${getBaseProductionUrl()}/dashboard/user/my_mentoring`,
         items: [
           {
             name: mentoring.title,
